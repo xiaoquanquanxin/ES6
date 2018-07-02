@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>swg</title>
+    <style>
+        .button-normal {
+            color: deepskyblue;
+            border: 1px solid skyblue;
+            background-color: transparent;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin-right: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .disabled {
+            cursor: not-allowed;
+        }
+
+        .btn-list-normal {
+            padding: 10px;
+        }
+
+        .border-normal {
+            border: 1px solid lightgrey;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap"></div>
+<script src="index.js"></script>
+<!--<script src="jQuery1.11.0.js"></script>-->
+<script>
+    var roles = {"add": false, "del": false, "update": true, "query": true};
+    var obj = {
+
+        tagName: "button", text: "添加", "role": "add", event: {
+            click: function () {
+                alert(1)
+            }
+        }
+    };
+//    var btn1 = QueryQ("<div></div>");
+    var btn2 = document.getElementById("wrap");
+    var btn2 = $(wrap)
+//    jQuery("<div></div>")
+    console.log('结果是:',btn2);
+
+    //    var btn2 = QueryQ({
+    //        tagName: "button", text: "删除", "role": "del", event: {
+    //            click: function () {
+    //                alert(1)
+    //            }
+    //        }
+    //    });
+    //    var btn3 = QueryQ({
+    //        tagName: "button", text: "修改", "role": "update", event: {
+    //            click: function () {
+    //                console.log(this)
+    //            }
+    //        }
+    //    });
+    //    var btn4 = QueryQ({
+    //        tagName: "button", text: "查找", "role": "query", event: {
+    //            click: function () {
+    //                console.log(this)
+    //            }
+    //        }
+    //    });
+    //
+    //    var wrap = document.getElementById("wrap");
+    //    var btnLists = QueryQ({"tagName": "div", className: "btn-list-normal border-normal"});
+    //    btnLists.append(btn1.el).append(btn2.el).append(btn3.el).append(btn4.el);
+    //    wrap.appendChild(btnLists.el);
+    //    btnLists.on("click", fn);
+    //    function fn(){
+    //        console.log("btnLists");
+    //    }
+    //    btnLists.off("click", fn);
+
+</script>
+</body>
+</html>
