@@ -6,12 +6,12 @@ function countDown(seconds) {
     return new Promise(function (resolve, reject) {
         var _loop = function _loop(i) {
             setTimeout(function () {
-                if (i === 13) {
+                if (i === 4) {
                     return reject(new Error("报错"));
                 } else if (i > 0) {
                     console.log(i);
                 } else {
-                    resolve(console.log("GO"));
+                    resolve(console.log("GO " + i));
                 }
             }, i * 222);
         };
@@ -22,12 +22,7 @@ function countDown(seconds) {
     });
 }
 //  使用promise
-var cou1 = countDown(3).then(function () {
-    console.log("countDown 完整成功");
-}, function (err) {
-    console.log("countDown 出错了" + err);
-});
-var cou2 = countDown(3);
+var cou2 = countDown(12);
 cou2.then(function () {
     console.log("countDown 完整成功");
 });
