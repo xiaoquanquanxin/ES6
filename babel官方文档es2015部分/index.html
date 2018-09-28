@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style>
+
+        body {
+            font-size: 20px;
+        }
+
+        .main {
+            width: 1200px;
+            margin: auto;
+        }
+
+        .clear::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .main > article {
+            width: 900px;
+            float: right;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .danger {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="main clear">
+    <article>
+        <h2>Babel 是一个 JavaScript 编译器。</h2>
+        <section>
+            <h3>箭头函数与this语法</h3>
+            <p>箭头函数用=>来表示一个函数,他同时支持表达式和语句的语法.</p>
+            <p>与一般函数不同,箭头函数与包裹它的代码共享相同的this对象,如果箭头函数在其他函数的内部,他也将共享该函数的arguments对象</p>
+            <h4>JavaScript</h4>
+    <pre><code>
+        // 表达式写法 Expression bodies
+        var odds = evens.map(v => v + 1);
+        var nums = evens.map((v, i) => v + i);
+
+        // 语句写法 Statement bodies
+        nums.forEach(v => {
+        if (v % 5 === 0)
+        fives.push(v);
+        });
+
+        // this 对象
+        var bob = {
+        _name: "Bob",
+        _friends: [],
+        printFriends() {
+        this._friends.forEach(f =>
+        console.log(this._name + " knows " + f));
+        }
+        };
+
+        // arguments 对象
+        function square() {
+        let example = () => {
+        let numbers = [];
+        for (let number of arguments) {
+        numbers.push(number * number);
+        }
+        return numbers;
+        };
+        return example();
+        }
+    </code></pre>
+        </section>
+        <section>
+            <h3>Class类</h3>
+            <p>ES2015的类只是一个语法糖，通过class关键字让语法更接近传统的面向对象模式，本质上还是基于原型的。</p>
+            <p>使用单一便捷的声明格式，使得类使用起来更方便，也更具互操作性。</p>
+            <p>类支持基于原型的继承，调用父类的构造函数，生成实例，静态方法和构造函数。</p>
+    <pre>
+        <code>
+            class SkinnedMesh extends THREE.Mesh {
+            constructor(geometry, materials) {
+            // 调用父类的构造函数 super是父类的实例
+            super(geometry, materials);
+
+            this.idMatrix = SkinnedMesh.defaultMatrix();
+            this.bones = [];
+            this.boneMatrices = [];
+            //...
+            }
+            update(camera) {
+            //调用this.update()
+            super.update();
+            }
+
+            // 静态方法
+            static defaultMatrix() {
+            return new THREE.Matrix4();
+            }
+        </code>
+    </pre>
+        </section>
+        <section>
+            <h3>增强的对象字面量</h3>
+            <p>经扩展后的对象字面量</p>
+            <ul>
+                <li>允许在结构中设置原型</li>
+                <li>简化了foo: foo这样的赋值</li>
+                <li>简化了定义方法和调用父级</li>
+                <li>设置动态的属性名</li>
+            </ul>
+            <p>这样使得对象字面量更接近类的声明，并且使得基于对象的设计更加方便。</p>
+    <pre>
+        <code>
+            var obj = {
+            // 设置 prototype
+            __proto__: theProtoObj,
+            // 计算属性不会重复设置__proto__，或者将直接触发错误。
+            ['__proto__']: somethingElse,
+            // ‘handler: handler’ 简写
+            handler,
+            // 方法
+            toString() {
+            // 调用父级方法
+            return "d " + super.toString();
+            },
+            // 设置动态的属性名
+            [ "prop_" + (() => 42)() ]: 42
+            };
+        </code>
+    </pre>
+            <script>
+                var par = {
+                    getName (){
+                        return this.name;
+                    }
+                };
+                var james = [12, 2];
+                var obj = {
+                    james,
+                    __proto__: par,
+                    name: 'obj',
+                    getName(){
+                        return super.getName();
+                    }
+                }
+                console.log(obj)
+            </script>
+        </section>
+        <section>
+            <h3>模板字符串</h3>
+            <p>模版字符串提供了构建字符串的语法糖，类似于Perl，Python等语言中的字符串插值。</p>
+            <p>可以构建一个自定义标签，避免注入攻击或者从字符串内容中构建更加高级的数据结构。</p>
+    <pre>
+        <code>
+            // 创建基本的模板字符串
+            `This is a pretty little template string.`
+
+            // 多行字符串
+            `In ES5 this is
+            not legal.`
+
+            // 插入变量
+            var name = "Bob", time = "today";
+            `Hello ${name}, how are you ${time}?`
+
+            // 不用转义
+            String.raw`In ES5 "\n" is a line-feed.`
+
+            // 创建一个HTTP请求头的模版字符串，通过替换内容来构建请求
+            GET`http://foo.org/bar?a=${a}&b=${b}
+            Content-Type: application/json
+            X-Credentials: ${credentials}
+            { "foo": ${foo},
+            "bar": ${bar}}`(myOnReadyStateChangeHandler);
+        </code>
+    </pre>
+        </section>
+        <section>
+            <h3>解构</h3>
+            <p>解构允许使用模式匹配的方式进行绑定，并支持匹配数组和对象。</p>
+            <p>解构具有一定的容错机制，就像查找普通对象foo['foo']这样，当没有找到时会返回undefined（而不会直接报错）。</p>
+            <p>但是,当上层结构都不存在时，解构是会报错的</p>
+            <pre><code>
+                // 列表（数组）匹配
+                var [a, , b] = [1,2,3];
+
+                // 对象匹配
+                var { op: a, lhs: { op: b }, rhs: c } = getASTNode()
+
+                // 对象匹配的简写
+                // 绑定当前作用域的 `op`, `lhs` 和 `rhs`
+                var {op, lhs, rhs} = getASTNode()
+
+                // 可以用在函数的参数中
+                function g({name: x}) {
+                console.log(x);
+                }
+                g({name: 5})
+
+                // 解构容错机制
+                var [a] = [];
+                a === undefined;
+
+                // 带默认值的解构容错
+                var [a = 1] = [];
+                a === 1;
+
+                // 解构 + 默认参数
+                function r({x, y, w = 10, h = 10}) {
+                return x + y + w + h;
+                }
+                r({x:1, y:2}) === 23
+            </code></pre>
+        </section>
+        <section>
+            <h3>默认参数(Default)\不定参数(Rest)\扩展运算符(Spread)</h3>
+            <p>默认参数(default)的功能是在函数被调用时对参数做自动估值(若没被赋值，则自动赋值).</p>
+            <p>扩展运算符(spread)则可以将数组转换为连续的函数参数.</p>
+            <p>不定参数(rest)用在参数末尾，将最末尾的参数转换为数组。</p>
+            <p>不定参数(rest)让我们不再需要arguments，更直接地解决了一些常见的问题。</p>
+        <pre>
+            <code>
+                y是默认参数
+                function f(x, y=12) {
+                // 如果没有传入y或传入了undefined，y的默认值为12
+                return x + y;
+                }
+                f(3) == 15
+
+                ...是扩展运算符
+                function f(x, y, z) {
+                return x + y + z;
+                }
+                // 将数组中的每个元素展开为函数参数
+                f(...[1,2,3]) == 6
+
+                y是不定参数
+                function f(x, ...y) {
+                // y是一个数组
+                return x * y.length;
+                }
+                f(3, "hello", true) == 6
+            </code>
+        </pre>
+        </section>
+        <section>
+            <h3>Let(定义变量)\Const(定义常量)</h3>
+            <p>这两个关键字具有块级作用域。</p>
+            <p>let是var的升级版。</p>
+            <p>const仅允许被赋值一次，通过静态限制（Static restrictions ）的方式阻止变量在赋值前被使用。</p>
+        <pre>
+            <code>
+                function f() {
+                {
+                let x;
+                {
+                // 这是正确的，因为const具有块级作用域
+                const x = "sneaky";
+                // 错误，"x"已被定义为const常量，不允许再赋值
+                x = "foo";
+                }
+                // 现在开始,const的x永远消失了
+                // 这是正确的，因为这里的"x"是被let定义的
+                x = "bar";
+                // 错误，"x"已经被定义，不允许再重复定义
+                let x = "inner";
+                }
+                }
+            </code>
+        </pre>
+        </section>
+        <section>
+            <h3 class="danger">迭代器(Iterators) + For..Of循环</h3>
+            <p>ES6中的迭代器对象允许像 CLR(Common Language Runtime)的IEnumerable 接口或者 Java 的
+                Iterable一样创建自定义迭代器，可以将for..in这种遍历模式更加一般化为for..of的形式。</p>
+            <p>它是支持惰性模式的，不需要真正实现一个数组（只需要实现Iterator接口），就像LINQ语言那样。</p>
+            <p>迭代器还可以基于”鸭子类型”来实现（使用TypeScript 这种基于类型的语法来说明）：</p>
+        <pre>
+            <code>
+                // 实现斐波那契数列的迭代器
+                let fibonacci = {
+                [Symbol.iterator]() {
+                let pre = 0, cur = 1;
+                return {
+                next() {
+                [pre, cur] = [cur, pre + cur];
+                return { done: false, value: cur }
+                }
+                }
+                }
+                }
+
+                for (var n of fibonacci) {
+                // 循环将在n > 1000 时结束
+                if (n > 1000)
+                break;
+                console.log(n);
+                }
+            </code>
+        </pre>
+        </section>
+        <section>
+            <h3 class="danger">Generators生成器</h3>
+            <p>Generator通过使用function*和yield关键字简化了迭代器的编写。通过function*声明的函数会返回一个Generators实例。</p>
+            <p>Generator可以看做是迭代器的子类，包含了额外的next和throw方法。</p>
+            <p>这些特性可以让得到的结果值再传回Generator，因此yield是一个具有返回值（或抛出一个值）的表达式。</p>
+        <pre>
+            <code>
+                var fibonacci = {
+                [Symbol.iterator]: function*() {
+                var pre = 0, cur = 1;
+                for (;;) {
+                var temp = pre;
+                pre = cur;
+                cur += temp;
+                yield cur;
+                }
+                }
+                }
+
+                for (var n of fibonacci) {
+                // truncate the sequence at 1000
+                if (n > 1000)
+                break;
+                console.log(n);
+                }
+            </code>
+        </pre>
+        </section>
+        <section>
+            <h3>模块modules</h3>
+            <p>ES6从语言层面对模块进行了支持。</p>
+            <p>编写方式借鉴了流行的JavaScript模块加载器（AMD, CommonJS）。</p>
+            <p>由宿主环境的默认加载器定义模块运行时的行为，采取隐式异步模式——在模块可以被获取和加载前不会有代码执行。</p>
+            <pre>
+                <code>
+                    // lib/math.js
+                    export function sum(x, y) {
+                    return x + y;
+                    }
+                    export var pi = 3.141593;
+
+
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3></h3>
+            <p></p>
+            <p></p>
+        </section>
+    </article>
+</div>
+</body>
+</html>
