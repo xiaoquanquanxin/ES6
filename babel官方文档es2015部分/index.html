@@ -30,6 +30,10 @@
             padding: 0;
         }
 
+        pre {
+            margin: .4em 0;
+        }
+
         .danger {
             color: red;
             font-weight: bold;
@@ -348,10 +352,35 @@
                     return x + y;
                     }
                     export var pi = 3.141593;
+                    怎么暴露不要紧
 
+                    // app.js
+                    接的时候可以接受全部并用math这个变量表示,这时math就相当于全局变量
+                    import * as math from "lib/math";
+                    console.log("2π = " + math.sum(math.pi, math.pi));
 
-                </code>
-            </pre>
+                    // otherApp.js
+                    可以用一个增强型字面量对象的方法接收一个模块,对象的键可以在全局调用
+                    import {sum, pi} from "lib/math";
+                    console.log("2π = " + sum(pi, pi));
+                </code></pre>
+            <p>还有的功能包括：export default 和 export *:</p>
+            <pre>
+                <code>
+                    // lib/mathplusplus.js
+                    export * from "lib/math";
+                    export var e = 2.71828182846;
+                    可以用export default设置一个默认暴露
+                    export default function(x) {
+                    return Math.exp(x);
+                    }
+
+                    // app.js
+                    <span class="danger">注意</span><span>接收某个模块时,如果这个模块有默认暴露值,则应写在第一位</span>
+                    import exp, {pi, e} from "lib/mathplusplus";
+                    console.log("e^π = " + exp(pi));
+                </code></pre>
+            <p>在希望调用某个模块的方法,或访问某个模块的变量值时,必须用import导出.导出的这个对象被exports这个全局变量指向</p>
         </section>
         <section>
             <h3></h3>
