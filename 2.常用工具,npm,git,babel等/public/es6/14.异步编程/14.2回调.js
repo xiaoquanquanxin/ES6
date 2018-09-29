@@ -27,6 +27,6 @@ for (k = 1; k < 12; k++) {
     (function (i) {
         setTimeout(function () {
             //console.log(i)
-        }, k * 10);
+        }, i * 10);
     }(k));
 }

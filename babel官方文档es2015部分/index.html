@@ -380,7 +380,11 @@
                     import exp, {pi, e} from "lib/mathplusplus";
                     console.log("e^π = " + exp(pi));
                 </code></pre>
-            <p>在希望调用某个模块的方法,或访问某个模块的变量值时,必须用import导出.导出的这个对象被exports这个全局变量指向</p>
+            <p>在希望调用某个模块的方法,或访问某个模块的变量值时,必须用import导入.导入的这个对象被exports这个全局变量指向</p>
+            <p>最佳实践：总是在模块的 最后 使用 export default 方法。</p>
+            <p>它让模块的出口更清晰明了，节省了阅读整个模块来寻找出口的时间。</p>
+            <p>更多的是，在大量CommonJS模块中，通用的习惯是设置一个出口值或者出口对象。</p>
+            <p>最受这个规则，可以让我们的代码更易读，且更方便的联合使用CommonJS和ES6模块。</p>
         </section>
         <section>
             <h3></h3>
@@ -390,4 +394,23 @@
     </article>
 </div>
 </body>
+<script>
+    let map = new Map([
+        ['name', 'david'],
+        [true, 'false'],
+        [1, 'one'],
+        [{}, 'object'],
+        [function () {
+        }, function () {
+            console.log(1)
+        }]
+    ]);
+
+    for (let key of map.keys()) {
+        console.log(typeof key, key, map.get(key));
+        if (typeof  map.get(key) === 'function') {
+            map.get(key)();
+        }
+    }
+</script>
 </html>
