@@ -143,6 +143,7 @@
     </pre>
             <script>
                 var par = {
+                    name: 'pname',
                     getName (){
                         return this.name;
                     }
@@ -153,10 +154,12 @@
                     __proto__: par,
                     name: 'obj',
                     getName(){
+                        console.log(super.name)
                         return super.getName();
                     }
                 }
                 console.log(obj)
+                console.log(obj.getName())
             </script>
         </section>
         <section>
@@ -394,7 +397,7 @@
     </article>
 </div>
 </body>
-<script>
+<script data="map">
     let map = new Map([
         ['name', 'david'],
         [true, 'false'],
@@ -402,15 +405,79 @@
         [{}, 'object'],
         [function () {
         }, function () {
-            console.log(1)
+            console.log('function')
         }]
     ]);
 
     for (let key of map.keys()) {
-        console.log(typeof key, key, map.get(key));
+//        console.log(typeof key, key, map.get(key));
         if (typeof  map.get(key) === 'function') {
             map.get(key)();
         }
     }
+
+    console.clear();
+
+</script>
+<script data="迭代器">
+    let fibonacci = {
+        [Symbol.iterator]() {
+            let pre = 0, cur = 1;
+            return {
+                next() {
+                    [pre, cur] = [cur, pre + cur];
+                    //  要return一个object,value代表迭代的n
+                    return {done: false, value: cur};
+                }
+            }
+        }
+    };
+
+    for (let n of fibonacci) {
+        // 循环将在n > 1000 时结束
+        if (n > 100)
+            break;
+        console.log(n);
+    }
+
+    let myIterator = {
+        [Symbol.iterator](){
+            let n = 0;
+            return {
+                next(){
+                    n++;
+                    return {value: n};
+                }
+            }
+        }
+    };
+    for (let n of myIterator) {
+        if (n > 3) {
+            break;
+        }
+        console.log(n);
+    }
+    console.clear();
+</script>
+<script data="生成器">
+    (function () {
+        let fibonacci = {
+            [Symbol.iterator]: function*() {
+                var pre = 0, cur = 1;
+                for (; ;) {
+                    var temp = pre;
+                    pre = cur;
+                    cur += temp;
+                    yield cur;
+                }
+            }
+        };
+        for (var n of fibonacci) {
+            // truncate the sequence at 1000
+            if (n > 100)
+                break;
+            console.log(n);
+        }
+    })();
 </script>
 </html>
