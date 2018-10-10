@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解构赋值</title>
+</head>
+<body>
+<h4>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。</h4>
+<h4>对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。</h4>
+<h4>对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。</h4>
+<h4>变量声明时不能用小括号</h4>
+<h4>但是给声明后的变量赋值时,需要用小括号. {x} = {x: 1}; 第一个{x}会被识别为代码块而报错</h4>
+
+<hr>
+<p>疑问</p>
+<h3>不建议使用括号</h3>
+<a href="http://es6.ruanyifeng.com/?search=promise&x=0&y=0#docs/destructuring#%E4%B8%8D%E8%83%BD%E4%BD%BF%E7%94%A8%E5%9C%86%E6%8B%AC%E5%8F%B7%E7%9A%84%E6%83%85%E5%86%B5">不能使用小括号的情况</a>
+<br>
+<a href="http://es6.ruanyifeng.com/?search=promise&x=0&y=0#docs/destructuring#%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%9C%86%E6%8B%AC%E5%8F%B7%E7%9A%84%E6%83%85%E5%86%B5">能够使用小括号的情况</a>
+<p>可以使用圆括号的情况只有一种：赋值语句的非模式部分，可以使用圆括号。</p>
+</body>
+</html>
