@@ -11,7 +11,7 @@
 }
 //  字符串for of遍历可以识别大于\uffff的字
 {
-    for (let x of String.fromCodePoint(0x22222)) {
+    for (let x of String.fromCodePoint(0x22222)+11) {
         console.log(x)
     }
 }
@@ -41,4 +41,15 @@
 
     x.padEnd(5, 'ab'); // 'xabab'
     x.padEnd(4, 'ab'); // 'xaba'
+}
+//  模板字符串
+{
+    const tmpl = addrs => `
+  <table>
+  ${addrs.map(addr => `
+    <tr><td>${addr.first}</td></tr>
+    <tr><td>${addr.last}</td></tr>
+  `).join('')}
+  </table>
+`;
 }
