@@ -1,8 +1,6 @@
 //  函数参数默认值
 {
-    log = (a = 12) => {
-        a++
-    };
+    log = (a = 12) => a++;
     let a = log();
 }
 //  作用域
@@ -69,5 +67,63 @@
 }
 //  函数的length属性，不包括 rest 参数,rest参数也不能设置默认值
 {
-    foo = (a = 1, ...b) => {};
+    foo = (a = 1, ...b) => {
+    };
+    foo.length = 0;
+}
+//  es6函数参数如果使用了扩展运算符rest,解构,默认值,则在函数体内不能使用'use strict';
+{
+    const doSomething = (function () {
+        'use strict';
+        return function (value = 42) {
+            return value;
+        };
+    }());
+}
+//  name指向这个函数的名字,bind返回的函数,name属性前缀为bound
+{
+    (function () {
+    }).bind(null).name;
+    (function james() {
+    }).bind(null).name;
+}
+//  箭头函数=>
+{
+
+}
+//  不需要返回值
+{
+    let fn = () => void doesNotReturn();
+    fn()
+}
+//  如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。
+{
+    fn = ()=> {
+        ;
+        ;
+        return;
+    }
+}
+/**
+ * 箭头函数注意点
+ * **/
+//  this的指向
+{
+    function Timer() {
+        this.s1 = 0;
+        this.s2 = 0;
+        // 箭头函数
+        setInterval(() => this.s1++, 1000);
+        // 普通函数
+        setInterval(function () {
+            this.s2++;
+        }, 1000);
+    }
+
+    var timer = new Timer();
+    //timer.s1  = 0; 每个1秒以后+1
+    //window.s2 = NaN;
+
+    setTimeout(() => console.log('s1: ', timer.s1), 3100);
+    setTimeout(() => console.log('s2: ', timer.s2), 3100);
 }
