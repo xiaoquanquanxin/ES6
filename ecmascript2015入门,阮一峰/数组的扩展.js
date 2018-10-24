@@ -65,7 +65,58 @@
     console.log(arr)
 }
 
-//  copyWithin
+//  copyWithin,将一部分拷贝到某处.参数:修改点,copy起始\终止位置
 {
-
+    [].copyWithin.call({length: 5, 3: 1}, 0, 3);
+}
+//  find,findIndex,找到第一个符合要求的值,下标
+{
+    [1, 23, 4, 5].find(x=>x > 10);
+    [1, 23, 4, 5].findIndex(x=>x > 10);
+    //  弥补indexof寻找nan的不足
+    [NaN].findIndex(y => Number.isNaN(y));
+}
+//  fill,填充一个数组
+{
+    [1, 24,].fill(4);
+    //  fill方法还可以接受第二个和第三个参数，用于指定填充的 起始位置 和 结束位置 。
+    [1, 24,].fill(4, 1);
+    //  填充的是对象,则填充引用
+    const obj = {name: '1'};
+    [1, 23, 32].fill(obj, 1);
+}
+//  entries,keys,values遍历数组.keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历
+{
+    for (let [index, elem] of ['a', 'b'].entries()) {
+        console.log(index, elem);
+    }
+    const arr = [1, 2, 3];
+    const iterator = arr.entries();
+    console.log(iterator);
+    console.log(iterator.next().value);
+    console.log(iterator.next().value);
+    console.log(iterator.next().value);
+    console.log(iterator.next().value);
+}
+//  includes,包含某元素
+{
+    [1, 2, NaN].includes(NaN);
+    //  第二个参数表示开始计数的下标,超过数组长度时,按下标为0开始计算
+    [1, 23, , 4].includes(undefined, 2);
+}
+//  数组实例的 flat()，flatMap(),将二维数组拉平为一维数组
+{
+    //  参数为拉平的层数,可以跳过空位
+    [1, 2, 3, 4, [54, 323, 3]].flat(12);
+}
+//  数组的空位,明确将空位转为undefined。
+{
+    Array.from(Array(3))[0] === undefined;
+    //  扩展运算符转为undefined
+    [...[a]] = [];
+    a === undefined;
+    //  copyWithin()会连空位一起拷贝。
+    [,,2,2,,2,2].copyWithin(1,3,5) === [,2,,2,,2,2];
+    //  entries,keys,values,find,findIndex
+    [1,3,,3,3,,3].findIndex(x=>x===undefined);
 }

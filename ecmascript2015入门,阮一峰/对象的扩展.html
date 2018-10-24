@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象的扩展</title>
+    <style>
+        p{margin:0;padding:0;}
+    </style>
+</head>
+<body>
+<p>自身,继承可枚举</p>
+<ul>
+    <li>for...in循环：只遍历对象自身的和继承的可枚举的属性。</li>
+</ul>
+<p>自身可枚举</p>
+<ul>
+    <li>Object.keys()：返回对象自身的所有可枚举的属性的键名。</li>
+    <li>JSON.stringify()：只串行化对象自身的可枚举的属性。</li>
+    <li>Object.assign()： 忽略enumerable为false的属性，只拷贝对象自身的可枚举的属性。</li>
+    <li>Object.getOwnPropertyNames(),自身属性的键名</li>
+    <li>Object.getOwnPropertySymbols(),自身的Symbols属性</li>
+</ul>
+<p>自身所有属性,无论枚举性或Symbol</p>
+<ul>
+    <li>Reflect.ownKeys()</li>
+</ul>
+
+<script src="对象的扩展.js"></script>
+</body>
+</html>
