@@ -4,27 +4,36 @@
     <meta charset="UTF-8">
     <title>对象的扩展</title>
     <style>
-        p{margin:0;padding:0;}
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            margin-top: .5em;
+        }
     </style>
 </head>
 <body>
-<p>自身,继承可枚举</p>
-<ul>
-    <li>for...in循环：只遍历对象自身的和继承的可枚举的属性。</li>
-</ul>
-<p>自身可枚举</p>
-<ul>
-    <li>Object.keys()：返回对象自身的所有可枚举的属性的键名。</li>
-    <li>JSON.stringify()：只串行化对象自身的可枚举的属性。</li>
-    <li>Object.assign()： 忽略enumerable为false的属性，只拷贝对象自身的可枚举的属性。</li>
-    <li>Object.getOwnPropertyNames(),自身属性的键名</li>
-    <li>Object.getOwnPropertySymbols(),自身的Symbols属性</li>
-</ul>
-<p>自身所有属性,无论枚举性或Symbol</p>
-<ul>
-    <li>Reflect.ownKeys()</li>
-</ul>
 
-<script src="对象的扩展.js"></script>
+<p>对象遍历属性规则</p>
+<ul>
+    <li>for in:自身及继承的可枚举键,唯一一个可遍历继承键</li>
+    <li>Object.keys:自身的可枚举键</li>
+    <li>Object.getOwnPropertyNames:自身的全部键</li>
+    <li>Object.getOwnPropertySymbols:自身symbol</li>
+</ul>
+<p>Reflect.ownKeys(),返回自身的一切属性</p>
+<ul>
+    <li>规则:</li>
+    <li>1.数字键从小到大</li>
+    <li>2.字母键按加入顺序</li>
+    <li>3.symbol键按加入顺序</li>
+</ul>
+<script>
+    var script = document.createElement('script');
+    script.src = '对象的扩展.js?v=' + Math.random();
+    document.head.appendChild(script)
+</script>
 </body>
 </html>

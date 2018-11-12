@@ -92,8 +92,90 @@
 }
 //  针对Object.assign不能正确返回set,get存取器的问题
 {
-    const getSameObject = (obj) => Object.defineProperties({}, Object.getOwnPropertyDescriptors(obj));
-    const _o = {name:21};
+    const getSameObject = (origin) => Object.defineProperties({}, Object.getOwnPropertyDescriptors(origin));
+    const _o = {
+        set _name(x) {
+            this.name = x
+        }, get _name() {
+            return this.name
+        }
+    };
     const obj = getSameObject(_o);
-    console.log(obj)
+    const asobj = Object.assign({}, _o);
+    console.log(asobj)
+}
+
+//  super指向当前对象的原型对象,只能用在对象的原型方法中
+{
+    const prot = {
+        name: 'parent', b(){
+            return this.name
+        }
+    };
+    const obj = {
+        name: 'obj', a(){
+            "use strict";
+            return super.name;
+        }, b(){
+            "use strict";
+            return super.b();
+        }
+    };
+    Object.setPrototypeOf(obj, prot);
+    console.log(obj.a());
+    //  super方法被调用相当于 Object.getPrototypeOf(this).b.call(this),故有:
+    console.log(obj.b());
+}
+
+//  解构赋值
+{
+    console.clear();
+    let proto = {
+        a: {
+            name: 'xx',
+        },
+    };
+    let obj1 = {
+        b: 2, c: 3,
+    };
+    Object.setPrototypeOf(obj1, proto);
+    let {a,b} = obj1;
+    //  直接解构继承原型属性,可以复制原型属性的引用
+    console.log(a, b);
+    //  【但是,扩展运算符的解构赋值,不能复制继承自原型对象的属性】！！！！
+    //  变量声明语句之中，如果使用解构赋值，扩展运算符后面必须是一个变量名
+    let {...x} = obj1;
+    console.log(x, x.a);
+}
+//  解构赋值
+//完整克隆一个对象，还拷贝对象原型的属性
+{
+    const proto = {name: 'origin'};
+    const obj = {name: 'obj', james: 'x'};
+    Object.setPrototypeOf(obj, proto);
+    let clone = {
+        '__proto__': Object.getPrototypeOf(obj), ...obj
+    };
+    console.log(clone);
+
+    let clone1 = Object.assign(Object.create(Object.getPrototypeOf(obj)), obj);
+    console.log(clone1);
+
+    //  Object.create( 原型 ， 属性的描述 );
+    let clone2 = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
+    console.log(Object.getOwnPropertyDescriptors(obj));
+    console.log(clone2);
+}
+
+//  扩展运算符的参数对象之中，如果有取值函数get，这个函数是会执行的。
+{
+    let obj1 = {
+        get x(){console.log(1)}
+    }
+    let obj2 = {
+        ...{
+            get x(){console.log(2)}
+        }
+    }
+
 }
