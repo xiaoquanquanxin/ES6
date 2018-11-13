@@ -38,47 +38,6 @@
     console.log(obj[key1].name)
 }
 
-//  两个值相等
-{
-    Object.is(+0, -0);
-    Object.is(NaN, NaN);
-}
-
-{
-    Object.defineProperty(Object, 'was', {
-        value: function (x, y) {
-            if (x === y) {
-                // 针对+0 不等于 -0的情况
-                return x !== 0 || 1 / x === 1 / y;
-            }
-            // 针对NaN的情况
-            return x !== x && y !== y;
-        }, configurable: false, enumerable: false, writable: false,
-    });
-    let res = Object.was(+0, -0);
-    console.log(Object.getOwnPropertyDescriptor(Object, 'was'))
-    console.log(res)
-}
-
-//  合并,所有可枚举属性复制到target , 只复制自身的可枚举属性
-{
-    const target = {a: 1};
-    const source1 = {b: 2};
-    const source2 = {a: 2, c: 3};
-    Object.assign(target, source1, source2);
-    console.log(target);
-    //  字符串会以数组形式拷贝进入目标对象,布尔,数字类型会被忽略
-    const tar = {};
-    const nba = 'nba';
-    Object.assign(tar, nba);
-    console.log(tar);
-}
-//  注意:
-//  1.浅拷贝,拷贝对象的引用
-//  2.同名属性替换
-//  3.target为数组时,会被视为对象
-//  4.Object.assign方法总是拷贝一个属性的值，而不会拷贝它背后的赋值方法或取值方法
-
 //  属性的可枚举性和遍历
 {
     //  Reflect.ownKeys,返回对象自身的一切键
