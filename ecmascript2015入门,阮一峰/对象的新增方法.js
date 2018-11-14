@@ -43,9 +43,9 @@
     console.log(obj2);
 }
 
-//  Object.getOwnPropertyDescriptors , 返回指定对象所有自身属性（非继承属性）的描述对象。
+//  Object.getOwnPropertyDescriptors , 返回指定对象所有自身属性及Symbol（非继承属性）的描述对象。
 {
-    const obj1 = {name: 1, getOwn: 'getOwnPropertyDescriptors'};
+    const obj1 = {name: 1, getOwn: 'getOwnPropertyDescriptors', [Symbol()]: 123};
     const des1 = Object.getOwnPropertyDescriptors(obj1);
     console.log(des1);
 }
