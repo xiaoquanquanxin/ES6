@@ -6,7 +6,7 @@
         if (a === b) {
             return a !== 0 || 1 / a === 1 / b;
         }
-        return a !== a || a === b;
+        return a !== a && b !== b;
     }
 }
 
@@ -103,3 +103,43 @@
     console.log(c);
 }
 
+//  Object.setPrototypeOf,Object.getPrototypeOf
+{
+    //   ES6 正式推荐的设置原型对象的方法
+    const proto = {name: 1};
+    const obj = Object.setPrototypeOf({}, proto);
+    console.log(obj);
+}
+
+//  Object.keys,Object.values,Object.entries
+{
+    //  Object.keys, 返回自身所有可枚举属性,不含symbol,不含继承
+    //  遍历顺序即 数字,字母加入的顺序
+    const {keys,values,entries} = Object;
+    const obj = {a: 1, c: 3, b: 2, [Symbol()]: 'symbol', "1": 'james'};
+    for (let key of keys(obj)) {
+        console.log(key);
+    }
+    for (let value of values(obj)) {
+        console.log(value);
+    }
+    for (let [key,value] of entries(obj)) {
+        console.log(key, value);
+    }
+    console.log(keys('123456'));
+    console.log(values('123456'));
+    console.log(entries('123456'));
+}
+
+//  Object.fromEntries 是 Object.entries的逆运算
+{
+    Object.fromEntries = Object.fromEntries || function (arr) {
+            const obj = {};
+            arr.forEach(function (t, i) {
+                obj[t[0]] = t[1]
+            });
+            return obj;
+        };
+    let obj = Object.fromEntries([['foo', 'bar'], ['baz', 42]]);
+    console.log(obj);
+}
