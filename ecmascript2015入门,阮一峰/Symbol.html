@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Symbol</title>
+</head>
+<body>
+<section>
+    <h4>概述</h4>
+    <p>一种新的原始数据类型Symbol,表示独一无二的值.他是js语言的第七种数据类型</p>
+    <p>symbol通过symbol函数生成一个原始数据类型的值,而不是一个对象</p>
+    <p>每一个symbol都是独一无二的.</p>
+    <p>如果symbol的description是一个对象,则会调用对象的tostring方法</p>
+    <p>Symbol 值不能与其他类型的值进行运算，会报错。</p>
+    <p>Symbol可以转为字符串和布尔,不能转为数字.</p>
+</section>
+<script>
+    var script = document.createElement('script');
+    script.src = 'Symbol.js?v=' + Math.random();
+    document.head.appendChild(script)
+</script>
+</body>
+</html>
