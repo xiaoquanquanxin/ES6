@@ -2,7 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>Symbol</title>
+    <style>
+        p {
+            line-height: 1.2em;
+            overflow: hidden;
+            position: relative;
+            text-align: justify;
+            word-break: break-all;
+        }
+
+        p.lve::after {
+            content: '...';
+            display: block;
+            line-height: 0.6em;
+            height: 1.2em;
+            position: absolute;
+            top: 1.2em;
+            right: 0;
+            width: 2em;
+            text-align: right;
+            letter-spacing: 0.05em;
+            background: linear-gradient(to right, transparent, white, white);
+        }
+    </style>
 </head>
 <body>
 <section>
@@ -13,11 +37,23 @@
     <p>如果symbol的description是一个对象,则会调用对象的tostring方法</p>
     <p>Symbol 值不能与其他类型的值进行运算，会报错。</p>
     <p>Symbol可以转为字符串和布尔,不能转为数字.</p>
+    <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 </section>
 <script>
     var script = document.createElement('script');
     script.src = 'Symbol.js?v=' + Math.random();
     document.head.appendChild(script)
+</script>
+<script>
+    window.onload = function () {
+        var p = document.getElementsByTagName('p');
+        Array.prototype.forEach.call(p, function (t, i) {
+            if (t.offsetHeight >= 3 * 19) {
+                t.style.height = 2 * 19 + 'px';
+                t.classList.add('lve');
+            }
+        })
+    }
 </script>
 </body>
 </html>
