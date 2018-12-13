@@ -68,6 +68,7 @@
 }
 
 //  Symbol.species 指向一个构造函数,创建衍生对象时调用
+//  实例对象在运行过程中，需要再次调用自身的构造函数时，会调用该属性指定的构造函数
 {
     class MyArray extends Array {
         static get [Symbol.species]() {
@@ -79,3 +80,6 @@
     });
     console.log(b instanceof MyArray, b instanceof Array, b instanceof Number, a, b);
 }
+/**
+ * 其他类似,调用对象的某个方法时会调用[Symbol.xx]的方法
+*/
