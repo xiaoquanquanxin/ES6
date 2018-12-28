@@ -191,22 +191,147 @@ console.clear()
     console.log(s1, s2);
 }
 
+/**
+ * has方法用来拦截HasProperty操作，即判断对象是否具有某个属性时，这个方法会生效。
+ * 典型的操作就是in运算符 ， 对for in 不生效。
+ * */
+//  隐藏某些属性
+{
+    let sup = {_name: 'xxxx', name: 'xxxx'};
+    Object.preventExtensions(sup);
+    let proxy = new Proxy(sup, {
+        has(target, key){
+            return true
+            "use strict";
+            return key[0] !== '_' && (key in target);
+        }
+    });
+    console.log('name' in proxy);
+    console.log('james' in proxy);
+    console.log(proxy)
+}
+//  如果原（对象）不可配置或者禁止扩展，这时has拦截返回false时会报错。因为在不可配置下的对象无法隐藏属性。
+
+/**
+ *construct方法用于拦截  new 命令，下面是拦截对象的写法。
+ * @target 构造函数
+ * @arguments 构造函数的参数
+ * @newTarget 构造函数代理
+ * 返回的必须是一个对象
+ * */
+{
+    let proxy = new Proxy(function (arg) {
+        this.name = arg;
+    }, {
+        construct(target, arg, newTarget){
+            "use strict";
+            console.log(target, arg, newTarget);
+            return {name: '没啥用啊'}
+        }
+    });
+    let p = new proxy('123456');
+    console.log(p)
+}
+
+/**
+ * deleteProperty方法用于拦截delete操作.
+ * 如果这个方法抛出错误或者返回false，当前属性就无法被delete命令删除。
+ *  如果是configurable为false的属性，则不可被拦截
+ * */
+{
+    let p = new Proxy({name: 1234}, {
+        deleteProperty(target, key){
+            "use strict";
+            console.log(target, key);
+            if (key === 'name') {
+                return false;
+            }
+            delete target[key]
+        }
+    });
+    delete p.name;
+    console.log(p)
+}
+
+/**
+ * defineProperty
+ * getOwnPropertyDescriptor
+ * isExtensible 拦截  Object.isExtensible
+ * */
+
+/**
+ * * getPrototypeOf   拦截  继承相关事宜
+ * Object.prototype.__proto__
+ * Object.prototype.isPrototypeOf()
+ * Object.getPrototypeOf()
+ * Reflect.getPrototypeOf()
+ * instanceof
+ * */
+
+/**
+ *ownKeys 拦截    循环相关
+ *
+ * Object.getOwnPropertyNames()
+ * Object.getOwnPropertySymbols()
+ * Object.keys()
+ * for...in
+ * */
+
+/**
+ * preventExtensions    拦截  Object.preventExtensions()
+ * 这个方法只有 Object.isExtensible 返回true ，即被封印的对象才能被调用
+ * 但正常的对象的 Object.isExtensible 返回false
+ * 所以要在preventExtensions里调用一次 Object.preventExtensions
+ * */
 
 
+/**
+ * setPrototypeOf   拦截  setPrototypeOf
+ *  返回布尔值
+ * */
+{
+    var handler = {
+        setPrototypeOf (target, proto) {
+            console.log('禁止拦截');
+            return true;
+            //throw new Error('禁止拦截');
+        }
+    };
+    var proto = {};
+    var target = function () {
+    };
+    var proxy = new Proxy(target, handler);
+    Object.setPrototypeOf(proxy, proto);
+}
 
 
+/**
+ * Proxy.revocable
+ * Proxy.revocable的一个使用场景是，目标对象不允许直接访问，必须通过代理访问，一旦访问结束，就收回代理权，不允许再次访问。
+ * */
+{
+    let target = {};
+    let handler = {};
+    let {proxy,revoke} = Proxy.revocable(target, handler);
+    //proxy.foo = 12345;
+    //console.log(proxy.foo);
+    target.oof = 123;
+    console.log(target, proxy);
+    revoke();
+    //console.log(proxy.foo);      访问报错
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * this指向
+ * Proxy 代理的情况下，目标对象内部的this关键字会指向 Proxy 代理。
+ * */
+{
+    let proxy = new Proxy({
+        getThis(){
+            "use strict";
+            console.log(this,proxy)
+        }
+    }, {});
+    proxy.getThis();
+}
