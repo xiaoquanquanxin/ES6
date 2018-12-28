@@ -21,27 +21,26 @@
  * get 方法用于拦截某个属性的读取操作，可以接受三个参数，依次为目标对象、属性名和 proxy 实例本身
  */
 {
-    var pipe = (function () {
-        return function (value) {
-            var funcStack = [];
-            var oproxy = new Proxy({}, {
-                get: function (pipeObject, fnName) {
-                    if (fnName === 'get') {
-                        return funcStack.reduce(function (val, fn) {
-                            return fn(val);
-                        }, value);
-                    }
-                    funcStack.push(window[fnName]);
-                    return oproxy;
+    function pipe(value) {
+        var funcStack = [];
+        var oproxy = new Proxy({}, {
+            get: function (pipeObject, fnName) {
+                if (fnName === 'ssss') {
+                    return funcStack.reduce(function (val, fn) {
+                        return fn(val);
+                    }, value);
                 }
-            });
-            return oproxy;
-        }
-    }());
+                funcStack.push(window[fnName]);
+                return oproxy;
+            }
+        });
+        return oproxy;
+    }
+
     var double = n => n * 2;
     var pow = n => n * n;
     var reverseInt = n => n.toString().split("").reverse().join("") | 0;
-    pipe(3).double.pow.reverseInt.get; // 63
+    pipe(3).double.pow.reverseInt.ssss; // 63
 }
 {
     const dom = new Proxy({}, {
@@ -87,16 +86,6 @@
     console.log(proxy.james === proxy);
     console.log(proxy.proxySelf === proxy);
 }
-{
-    const proxy = new Proxy({}, {
-        get: function (target, property, receiver) {
-            return receiver;
-        }
-    });
-
-    const d = Object.create(proxy);
-    d.a === d // true
-}
 //  如果一个属性不可配置（configurable）且不可写（writable），则 Proxy 不能修改该属性，否则通过 Proxy 对象访问该属性会报错
 {
     let obj = Object.defineProperty({}, 'name', {
@@ -136,15 +125,13 @@
  * set  方法用来拦截某个属性的赋值操作，可以接受四个参数，依次为目标对象、属性名、属性值和 Proxy 实例本身，
  * */
 {
-    const handler = {
+    const proxy = new Proxy({}, {
         set: function (obj, prop, value, receiver) {
             obj[prop] = receiver;
         }
-    };
-    const proxy = new Proxy({}, handler);
+    });
     const myObj = {};
     Object.setPrototypeOf(myObj, proxy);
-
     myObj.foo = 'bar';
     console.log(myObj.foo === myObj);
 }
@@ -170,10 +157,9 @@
 //  注意，严格模式下，set代理如果没有返回true，就会报错。
 
 
-console.clear()
 /**
  * apply方法拦截函数的 调用、call和apply操作。
- * apply方法可以接受三个参数，分别是目标对象、this、arguments。
+ * apply方法可以接受三个参数，分别是目标对象[这时是一个函数]、this、arguments。
  * */
 {
     function sum(left = 0, right = 0) {
@@ -201,7 +187,7 @@ console.clear()
     Object.preventExtensions(sup);
     let proxy = new Proxy(sup, {
         has(target, key){
-            return true
+            return true;
             "use strict";
             return key[0] !== '_' && (key in target);
         }
@@ -298,9 +284,8 @@ console.clear()
         }
     };
     var proto = {};
-    var target = function () {
-    };
-    var proxy = new Proxy(target, handler);
+    var proxy = new Proxy(function () {
+    }, handler);
     Object.setPrototypeOf(proxy, proto);
 }
 
@@ -330,7 +315,7 @@ console.clear()
     let proxy = new Proxy({
         getThis(){
             "use strict";
-            console.log(this,proxy)
+            console.log(this, proxy)
         }
     }, {});
     proxy.getThis();
