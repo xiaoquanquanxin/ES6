@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reflect</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<h3>Proxy是拦截,可以控制是否执行接下来的原生操作.而Reflect相当于原生操作</h3>
+<h3>概述</h3>
+<ol>
+    <li>Reflect对象与Proxy对象一样,是为了操作对象提供的API.</li>
+    <li>将Object对象的一些明显属于语言内部的方法[Object.defineProperty等]放到Reflect对象上.</li>
+    <li>修改某些Object方法的返回结果使其合理化.</li>
+    <li>让Object操作都编程函数行为.如name in obj delete obj.name 是命令行为.而Reflect.has和Reflect.deleteProperty是函数行为</li>
+    <li>Reflect对象的方法与Proxy对象的方法一一对应.可以让Proxy对象的方法方便的调取对应的Reflect方法.</li>
+</ol>
+<br>
+<h3>静态方法</h3>
+<ol>
+    <li>Reflect.apply(target,thisArg,args)</li>
+    <li>Reflect.construct(target,args)</li>
+    <li>Reflect.get(target,name,receiver)</li>
+    <li>Reflect.set(target,name,value,receiver)</li>
+    <li>Reflect.defineProperty(target,name,desc)</li>
+    <li>Reflect.deleteProperty(target,name)</li>
+    <li>Reflect.has(target,name)</li>
+    <li>Reflect.ownKeys(target)</li>
+    <li>Reflect.isExtensible(target)</li>
+    <li>Reflect.preventExtensions(target)</li>
+    <li>Reflect.getOwnPropertyDescriptor(target,name)</li>
+    <li>Reflect.getPrototypeOf(target)</li>
+    <li>Reflect.setPrototypeOf(target,prototype)</li>
+</ol>
+</body>
+<script src="loadJs.js"></script>
+<script>
+    loadJs('Reflect.js');
+</script>
+</html>
