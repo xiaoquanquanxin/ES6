@@ -7,6 +7,7 @@
         body {
             padding: 0;
             margin: 0;
+            text-align: justify;
         }
     </style>
 </head>
@@ -14,7 +15,7 @@
 <h3>Proxy是拦截,可以控制是否执行接下来的原生操作.而Reflect相当于原生操作</h3>
 <h3>概述</h3>
 <ol>
-    <li>Reflect对象与Proxy对象一样,是为了操作对象提供的API.</li>
+    <li>Reflect[反映；反射，照出；反省]对象与Proxy对象一样,是为了操作对象提供的API.</li>
     <li>将Object对象的一些明显属于语言内部的方法[Object.defineProperty等]放到Reflect对象上.</li>
     <li>修改某些Object方法的返回结果使其合理化.</li>
     <li>让Object操作都编程函数行为.如name in obj delete obj.name 是命令行为.而Reflect.has和Reflect.deleteProperty是函数行为</li>
@@ -37,9 +38,12 @@
     <li>Reflect.getPrototypeOf(target)</li>
     <li>Reflect.setPrototypeOf(target,prototype)</li>
 </ol>
+<h3>使用Proxy实现观察者模式</h3>
+<p>观察者模式是函数自动观察数据对象,一旦对象有变化,函数自动执行</p>
 </body>
 <script src="loadJs.js"></script>
 <script>
     loadJs('Reflect.js');
 </script>
 </html>
+
