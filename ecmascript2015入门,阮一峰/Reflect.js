@@ -177,7 +177,6 @@
     const observe = fn =>queuedObservers.add(fn);
     const observable = obj => new Proxy(obj, {
         set: function (target, key, value, receiver) {
-            debugger;
             const result = Reflect.set(target, key, value, receiver);
             queuedObservers.forEach(observe => observe());
             return result;

@@ -8,12 +8,41 @@
             padding: 0;
             margin: 0;
             text-align: justify;
+            word-break:break-all;
         }
     </style>
 </head>
 <body>
+<h3>Promise的含义</h3>
+<ol>
+    <li>从语法上将,Promise是一个对象,从它可以获取异步操作的消息.</li>
+    <li>它提供了异步编程的一种解决方案,比传统的回调函数和事件更加合理</li>
+    <li>Promise是一个容器,里面保存着某个未来才会结束的事件(通常是一个异步事件)的结果.</li>
+</ol>
+<h3>Promise对象的特点</h3>
+<ol>
+    <li>对象的状态不受外界影响.</li>
+    <li>有三种状态:进行中pending,成功fulfilled,失败rejected.</li>
+    <li>任何其他的操作都无法改变这个状态</li>
+</ol>
+<ol>
+    <li>一旦改变状态,就不会再变,任何时候都可以得到这个结果.</li>
+    <li>状态的改变有两种可能:1.pending→fulfilled;2.pending→rejected.</li>
+    <li>只要这两种情况发生,状态就凝固了,不会再变,称为已定型[resolved].</li>
+    <li>已定型的Promise对象添加回调函数,也会得到结果,但这个结果是死的.</li>
+</ol>
 
-
+<h3>作用</h3>
+<ol>
+    <li>可以将异步操作以同步形式表示出来,防止层层回调.</li>
+    <li>Promise提供统一的接口,使控制异步操作更容易.</li>
+</ol>
+<h3>缺点</h3>
+<ol>
+    <li>无法取消Promise.</li>
+    <li>必须指明回调,否则会抛出错误,不会反映到外部.</li>
+    <li>pending状态下,无法得知目前进展</li>
+</ol>
 <script src="loadJs.js"></script>
 <script>
     loadJs('Promise对象.js');
