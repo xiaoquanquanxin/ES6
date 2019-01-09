@@ -8,7 +8,7 @@
             padding: 0;
             margin: 0;
             text-align: justify;
-            word-break:break-all;
+            word-break: break-all;
         }
     </style>
 </head>
@@ -25,7 +25,7 @@
     <li>有三种状态:进行中pending,成功fulfilled,失败rejected.</li>
     <li>任何其他的操作都无法改变这个状态</li>
 </ol>
-<ol>
+<ol start="4">
     <li>一旦改变状态,就不会再变,任何时候都可以得到这个结果.</li>
     <li>状态的改变有两种可能:1.pending→fulfilled;2.pending→rejected.</li>
     <li>只要这两种情况发生,状态就凝固了,不会再变,称为已定型[resolved].</li>
@@ -65,8 +65,10 @@
     <li>Promise.all用于将多个Promise实例包装成一个新的Promise实例.</li>
     <li>它接收一个具有Iterator接口的参数作为实参,每个成员都必须是Promise实例,如果不是,则调用Promise.resolve方法将它转为Promise的实例.</li>
     <li>当参数的成员的状态都是fulfilled时,它的状态才会变成fulfilled.</li>
-    <li>如果有某个成员的状态是rejected,它的状态就变成rejected,此时第一个被rejected的实例返回值,会传递给它的回调.</li>
-    <li>如果某个成员定义了catch方法,并且它的状态变成了rejected,则不会触发Promise.all的catch方法.这是因为这个执行了自身catch的成员返回了一个新的Promise对象,而Promise.all的参数指向了新的对象.所以all执行了then方法.</li>
+    <li>如果有某个成员的状态是rejected,它的状态就变成rejected,此时第一个被rejected的实例返回值,会传递给它的catch回调.</li>
+    <li>如果某个成员定义了catch方法,并且它的状态变成了rejected,则不会触发Promise.all的catch方法.</li>
+    <li>这是因为这个执行了自身catch的成员返回了一个新的Promise对象,而Promise.all的参数指向了新的对象.所以all执行了then方法.</li>
+    <li>它的then方法的值总是所有实例的返回值.</li>
 </ol>
 <h3>Promise.race</h3>
 <ol>

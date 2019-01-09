@@ -164,7 +164,9 @@
         const p3 = new Promise(function (resolve, reject) {
             resolve('p3');
         });
-        const p = Promise.all([p1, p2, p3]).catch(function (err) {
+        const p = Promise.all([p1, p2, p3]).then(function (res) {
+            alert('red')
+        }).catch(function (err) {
             console.log('all的catch\n', err);
             return 123
         }).finally(function () {
@@ -174,7 +176,6 @@
                 console.log(p);
             }, 2)
         });
-
     }, 100);
 }
 
