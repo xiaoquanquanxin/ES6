@@ -1,17 +1,12 @@
 {
-    function timeout(ms) {
-        return new Promise((resolve, reject)=> {
-            setTimeout(function () {
-                if (Math.random() > 0.5) {
-                    resolve('√√√');
-                } else {
-                    reject('xxx')
-                }
-            }, ms);
-        })
-    }
-
-    timeout(100).then(value=> console.log(value), err=>console.log(err));
+    const timeout = new Promise((resolve, reject)=> {
+        if (Math.random() > 0.5) {
+            resolve('√√√');
+        } else {
+            reject('xxx')
+        }
+    });
+    timeout.then(value=> console.log(value), err=>console.log(err));
 }
 
 {
@@ -35,7 +30,6 @@
             client.send();
         });
     };
-
     getJSON("./Promise对象.html").then(function (json, promise) {
         console.log('Contents: ' + json);
         console.log(promise)
@@ -48,7 +42,6 @@
     const p1 = new Promise(function (resolve, reject) {
         // ...
     });
-
     const p2 = new Promise(function (resolve, reject) {
         // ...
         resolve(p1);
@@ -64,13 +57,12 @@
 
 {
     const p1 = new Promise(function (resolve, reject) {
-        setTimeout(() => reject(new Error('p1报错')), 100)
+
     });
     const p2 = new Promise(function (resolve, reject) {
-        setTimeout(() => {
-            resolve(p1);
-            console.log('p2')
-        }, 100);
+        resolve(p1);
+        console.log('p2')
+
     });
     p2.then(result => console.log(result))
         .catch(error => console.log(error));
@@ -78,18 +70,12 @@
 
 {
     new Promise(function (resolve, reject) {
-        setTimeout(function () {
-            resolve('异步');
-            console.log('同步')
-        }, 100)
     }).then(val=>console.log(val));
     //  resolved是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务。
 
     //  一般来说,调用完resolve或reject之后,Promise的使命就完成了,后续操作应该放在then里.
     new Promise(function (resolve) {
-        setTimeout(function () {
-            resolve(111);
-        }, 0)
+        resolve(111);
     })
 }
 
@@ -97,5 +83,102 @@
  * Promise.prototype.then
  * */
 {
+    new Promise(function (resolve) {
+        resolve(1);
+    }).then(function (resolve) {
+        console.log(resolve);
+        return 2;
+    }).then(function (resolve) {
+        console.log(resolve)
+    })
+}
+
+/**
+ * Promise.prototype.catch
+ * */
+{
+    function getJSON(url) {
+        return new Promise(function (resolve, reject) {
+            reject(url);
+        })
+    }
+
+    getJSON('/posts.json').then(function (posts) {
+        // ...
+    }).catch(function (error) {
+        // 处理 getJSON 和 前一个回调函数运行时发生的错误
+        console.log('发生错误！', error);
+    });
+}
+
+{
+    new Promise(function (resolve, reject) {
+        //  普通地抛出错误,没问题
+        throw new Error('xxx');
+
+    }).catch(function (err) {
+        console.log(err);
+    });
+    new Promise(function (resolve, reject) {
+        resolve('ok');
+        //  但如果resolve指向了,promise会认为他的状态变成了成功,这时会冻结这个状态.
+        //  抛出错误是不会触发catch的,只不过这个例子模拟不出来,用reject可以模拟出
+        //throw new Error('xxx');
+        reject('false');
+
+    }).then(function (value) {
+        console.log(value)
+    }).catch(function (error) {
+        console.log(error)
+    });
+}
+
+{
+    new Promise(function (resolve, reject) {
+        // 下面一行会报错，因为x没有声明
+        throw new Error('xxx');
+    });
+    console.log('xxx报错不会影响外层代码');
+}
+
+/**
+ * Promise.all
+ * 用于将多个Promise实例包装成一个新的Promise实例
+ * */
+{
+    const p1 = new Promise(function (resolve,reject) {
+
+    });
+    const p2 = new Promise(function (resolve,reject) {
+
+    });
+    const p3 = new Promise(function (resolve,reject) {
+
+    });
+    const p = Promise.all([p1, p2, p3]);
+    console.log(p);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

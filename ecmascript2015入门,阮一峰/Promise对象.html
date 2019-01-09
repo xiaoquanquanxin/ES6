@@ -31,7 +31,6 @@
     <li>只要这两种情况发生,状态就凝固了,不会再变,称为已定型[resolved].</li>
     <li>已定型的Promise对象添加回调函数,也会得到结果,但这个结果是死的.</li>
 </ol>
-
 <h3>作用</h3>
 <ol>
     <li>可以将异步操作以同步形式表示出来,防止层层回调.</li>
@@ -43,9 +42,44 @@
     <li>必须指明回调,否则会抛出错误,不会反映到外部.</li>
     <li>pending状态下,无法得知目前进展</li>
 </ol>
+<hr>
+<h3>Promise.prototype.then</h3>
+<ol>
+    <li>为Promise实例添加状态改变时的回调函数.</li>
+    <li>返回一个新的Promise实例,不是原来那个Promise实例.因此可以then后面再then.</li>
+    <li>而then里面的return值是一下一个函数的实参.</li>
+</ol>
+<h3>Promise.prototype.then</h3>
+<ol>
+    <li>是.then(null/undefined , rejection)的别名,指定发生错误时的回调函数.</li>
+    <li>如果then方法指定的回调函数在运行中发送错误,也会被catch方法捕获.这是因为Promise对象的错误具有冒泡性质,会之一向后传递.</li>
+</ol>
+<h3>Promise.prototype.finally</h3>
+<ol>
+    <li>用于无论Promise对象状态如何,都会执行的操作.</li>
+    <li>finally方法的回到函数不接受任何参数,所以无法判断Promise对象的状态是fulfilled还是rejected.所以finally里的操作应该与状态无关,不依赖Promise对象的执行结果.</li>
+</ol>
+<hr>
+<h3>Promise.all</h3>
+<ol>
+    <li>Promise.all用于将多个Promise实例包装成一个新的Promise实例.</li>
+    <li>它接收一个具有Iterator接口的参数作为实参,每个成员都必须是Promise实例,如果不是,则调用Promise.resolve方法将它转为Promise的实例.</li>
+    <li>当参数的成员的状态都是fulfilled时,它的状态才会变成fulfilled.</li>
+    <li>如果有某个成员的状态是rejected,它的状态就变成rejected,此时第一个被rejected的实例返回值,会传递给它的回调.</li>
+</ol>
 <script src="loadJs.js"></script>
 <script>
     loadJs('Promise对象.js');
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
