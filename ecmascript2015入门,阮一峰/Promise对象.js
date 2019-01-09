@@ -146,18 +146,66 @@
  * 用于将多个Promise实例包装成一个新的Promise实例
  * */
 {
-    const p1 = new Promise(function (resolve,reject) {
+    setTimeout(function () {
+        console.clear();
+        return;
+        const p1 = new Promise(function (resolve, reject) {
+            "use strict";
+            setTimeout(function () {
+                reject('errrrrrrrrrr');
+            }, 1);
+        }).catch(function (err) {
+            console.log('p1自己的catch', err);
+            return err;
+        });
+        const p2 = new Promise(function (resolve, reject) {
+            resolve('p2');
+        });
+        const p3 = new Promise(function (resolve, reject) {
+            resolve('p3');
+        });
+        const p = Promise.all([p1, p2, p3]).catch(function (err) {
+            console.log('all的catch\n', err);
+            return 123
+        }).finally(function () {
+            console.log('**********Promise.all  finally***************');
+            console.log(p, p1, p2, p3);
+            setTimeout(function () {
+                console.log(p);
+            }, 2)
+        });
 
-    });
-    const p2 = new Promise(function (resolve,reject) {
+    }, 100);
+}
 
-    });
-    const p3 = new Promise(function (resolve,reject) {
+/**
+ * Promise.race
+ * 如果说.all是等待全部实例完成,那么race就是等待第一个实例完成
+ * */
+{
+    setTimeout(function () {
+        console.clear();
+        return;
+        const p1 = new Promise(function (resolve, reject) {
 
-    });
-    const p = Promise.all([p1, p2, p3]);
-    console.log(p);
-
+        });
+        const p2 = new Promise(function (resolve, reject) {
+            resolve('p2成功了');
+        }).then(function (result) {
+            var str = 'p2的then:' + result;
+            console.log(str);
+            return str;
+        });
+        const p = Promise.race(new Set([p1, p2]));
+        p.then(function (result) {
+            console.log(result);
+        }).finally(function () {
+            setTimeout(function () {
+                console.log(p);
+                console.log(p1, p2);
+            }, 1)
+        })
+    }, 100);
 }
 
 
