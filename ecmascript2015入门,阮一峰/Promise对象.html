@@ -49,9 +49,9 @@
     <li>返回一个新的Promise实例,不是原来那个Promise实例.因此可以then后面再then.</li>
     <li>而then里面的return值是一下一个函数的实参.</li>
 </ol>
-<h3>Promise.prototype.then</h3>
+<h3>Promise.prototype.catch</h3>
 <ol>
-    <li>是.then(null/undefined , rejection)的别名,指定发生错误时的回调函数.</li>
+    <li>是.then(null/undefined , reject)的别名,指定发生错误时的回调函数.</li>
     <li>如果then方法指定的回调函数在运行中发送错误,也会被catch方法捕获.这是因为Promise对象的错误具有冒泡性质,会之一向后传递.</li>
 </ol>
 <h3>Promise.prototype.finally</h3>
