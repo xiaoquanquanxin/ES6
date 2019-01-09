@@ -73,19 +73,27 @@
     <li>Promise.race将多个Promise实例,包装成一个新的Promise实例.</li>
     <li>它接收和all相同的参数,如果有某个成员的状态发生改变,则它会发生改变,改变的成员实例的返回值传递给它的回调函数.</li>
 </ol>
+<h3>Promise.resolve</h3>
+<p>将现有对象转为Promise对象.</p>
+<ol>
+    <li>参数是一个Promise实例,那么return这个实例.</li>
+    <li>参数是一个具有then方法的对象,那么相当于给实例添加了相同的then方法,然后立刻执行对象的then方法.</li>
+    <li>参数是不具有then方法,或不是一个对象,则返回一个状态为resolved的实例.</li>
+    <li>无参数,返回一个状态为resolved的实例.</li>
+</ol>
+<h3>Promise.reject</h3>
+<ol>
+    <li>返回一个实例,状态为rejected,值为传入的参数.</li>
+</ol>
+<h3>Promise.try</h3>
+<p>只是个提案,不知道或不想区分,函数f是同步还是异步.有两种方法可以实现.</p>
+<ol>
+    <li>async函数</li>
+    <li>new Promise(resolve=>resolve(f()))</li>
+</ol>
 <script src="loadJs.js"></script>
 <script>
     loadJs('Promise对象.js');
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

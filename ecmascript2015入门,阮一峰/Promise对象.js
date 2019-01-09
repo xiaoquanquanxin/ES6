@@ -209,17 +209,66 @@
 }
 
 
+/**
+ *  Promise.resolve
+ *  返回一个Promise实例
+ * */
+{
+    setTimeout(function () {
+        console.clear();
+        return;
+        let obj = {
+            then: function (resolve, reject) {
+                reject(1);
+            }
+        };
+        const p = Promise.resolve(obj).catch(function (err) {
+            console.log(err);
+            return err;
+        });
+        setTimeout(function () {
+            console.log(p);
+        }, 11)
+    }, 100)
+}
+
+
+/**
+ *  Promise.reject
+ *  返回一个状态为reject的实例,值为Promise.reject方法的参数
+ * */
 
 
 
+/**
+ * 应用 加载图片
+ * */
+{
+    setTimeout(function () {
+        console.clear();
+        const preLoadImage = function (path) {
+            return new Promise(function (resolve, reject) {
+                const image = new Image();
+                image.onload = resolve;
+                image.onerror = reject;
+                image.src = path;
+            })
+        };
+        preLoadImage('ht1tps://www.baidu.com/img/bd_logo1.png?where=super').then(function (resolve) {
+            console.log(this, resolve);
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }, 100);
+}
 
+/**
+ * Promise.try
+ * */
 
+{
 
-
-
-
-
-
+}
 
 
 
