@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iterator 和 for...of 循环</title>
+</head>
+<body>
+<h3>Iterator（遍历器）的概念</h3>
+<ol>
+    <li>es6有四种数据集合,数据,对象,map,set.遍历器定义了统一的接口机制来处理不同的数据.</li>
+    <li>遍历器是一种机制,提供了一种接口,提供统一的访问机制,可以依次处理这四种数据结构的成员.</li>
+</ol>
+<h3>作用:</h3>
+<ol>
+    <li>提供访问接口.</li>
+    <li>使成员按次序排列.</li>
+    <li>提供for...of消费.</li>
+</ol>
+<h3>遍历过程</h3>
+<ol>
+    <li>创建一个指针对象,指向当前数据结构的起始位置.</li>
+    <li>第一次调用指针的next方法,可以将指针指向数据结构的第一个成员.</li>
+    <li>不断调用指针对象的next方法直到它指向数据结构的结束位置.</li>
+    <li>每一次调用next方法,都会返回数据结构中的当前成员信息.就是返回一个包含value和done两个属性的对象.value是成员的值,done是遍历是否完成.</li>
+</ol>
+<ol>
+    <li>Iterator只是把接口规格加到数据结构上,遍历器与它所遍历的数据结构是分开的.</li>
+</ol>
+<h3>默认Iterator接口</h3>
+<ol>
+    <li>接口的目的就是为所有数据结构提供统一的访问机制,即for...of循环.</li>
+    <li>当使用for...of循环遍历某种数据结构时,该循环会自动去寻找Iterator接口.</li>
+    <li>默认Iterator接口部署在数据结构的Symbol.Iterator属性.凡是部署了Symbol.iterator属性的数据结构，就称为部署了遍历器接口.调用这个接口，就会返回一个遍历器对象.</li>
+    <li>数据结构的Symbol.iterator属性指向遍历器生成函数.调用这个函数会返回一个遍历器.</li>
+</ol>
+<h3>原生具备Iterator接口的数据结构</h3>
+<ol>
+    <li>Array</li>
+    <li>Map</li>
+    <li>Set</li>
+    <li>String</li>
+    <li>TypedArray</li>
+    <li>NodeList对象</li>
+    <li>arguments对象</li>
+</ol>
+<p>对象上没有Iterator接口,是因为对象的属性遍历规则不确定,需要手动指定.</p>
+<p>本质上,遍历器是一种线性处理,对于任何非线性的数据机构部署遍历器接口,就等于部署一种线性转换.</p>
+<h3>对于类数组对象</h3>
+<ol>
+    <li>可以使其转为数组,再调用数组的Symbol.iterator返回遍历器.</li>
+    <li>可以使其原型对象的Symbol.iterator方法指向数组原型对象的Symbol.iterator方法.</li>
+</ol>
+<p>如果Symbol.iterator方法对应的不是遍历器生成函数,在进行相关操作时,则会抛出错误.</p>
+<hr>
+<h3>Iterator接口的场合</h3>
+<ol>
+    <li>for...of,Array.from,Map,Set,WeaKSet,WeakMap,Promise.all,Promise.race.</li>
+    <li>解构赋值,set结构进行解构赋值时,会默认调用Symbol.iterator方法.</li>
+    <li>扩展运算符.</li>
+    <li>yield*,后面跟的是一个可遍历的结构,它会调用该结构的遍历器接口.</li>
+</ol>
+<hr>
+<h3>字符串的Iterator接口</h3>
+<ol>
+    <li>字符串是一个类似数据的对象,也具有其原生Iterator接口.</li>
+    <li>只有new出来的基本对象类型的字符串,才可以修改器Symbol.iterator方法.</li>
+</ol>
+<hr>
+<h3 style="color:red;">Iterator与Generator</h3>
+
+<hr>
+<h3>遍历对象的return,throw</h3>
+<ol>
+    <li>遍历器除了next,还有return和throw方法.它们是可选的.</li>
+    <li>如果for...of循环提前退出,报错,或有break语句时触发return方法.</li>
+    <li>return方法必须返回一个对象，这是 Generator 规格决定的.</li>
+</ol>
+<script src="loadJs.js"></script>
+<script>
+    loadJs('Iterator 和 for...of 循环.js');
+</script>
+</body>
+</html>
