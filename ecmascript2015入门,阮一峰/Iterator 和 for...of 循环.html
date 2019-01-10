@@ -64,6 +64,7 @@
 <ol>
     <li>字符串是一个类似数据的对象,也具有其原生Iterator接口.</li>
     <li>只有new出来的基本对象类型的字符串,才可以修改器Symbol.iterator方法.</li>
+    <li>对于字符串来说，for...of循环还有一个特点，就是会正确识别 32 位 UTF-16 字符。</li>
 </ol>
 <hr>
 <h3 style="color:red;">Iterator与Generator</h3>
@@ -78,6 +79,11 @@
 <h3>for...of循环</h3>
 <ol>
     <li>对数组,只返回具有数字索引的属性.</li>
+    <li>对map和set,遍历的顺序是按照各个成员被添加进数据结构的顺序.</li>
+    <li>对map遍历,返回一个数组,数组的两个成员是被遍历成员的键和值.对set遍历,返回一个值.</li>
+    <li>对entries,keys,values方法生成的对象,遍历的都是计算生成的数据结构.</li>
+    <li>对对象,可以调用Reflect.ownKeys返回一个对象的键名的数组.</li>
+    <li>另一个办法是用Generator重新包装一下.</li>
 </ol>
 <script src="loadJs.js"></script>
 <script>

@@ -166,6 +166,12 @@
     let newStrIterator = str[Symbol.iterator]();
     //console.log(newStrIterator.next());
     console.log([...str]);
+
+    //  对于字符串来说，for...of循环还有一个特点，就是会正确识别 32 位 UTF-16 字符。
+    for (let x of '\uD83D\uDC0A\uD83D\uDC0B\uD83D\uDC0C\uD83D\uDC0D\uD83D\uDC0E\uD83D\uDC0F') {
+        //console.log(x);
+    }
+
 }
 
 
@@ -210,44 +216,57 @@
     const arr = ['red', 'green', 'blue'];
     const obj = {};
     obj[Symbol.iterator] = arr[Symbol.iterator].bind(arr);
-    for(let v of obj) {
-        console.log(v); // red green blue
+    for (let v of obj) {
+        //console.log(v); // red green blue
     }
 }
 
+{
+    //  set
+    const setObj = new Set(['xx', 'yy']);
+    setObj.add('james');
+    for (let key of setObj) {
+        //console.log(key);
+    }
+    //  map
+    const mapObj = new Map();
+    mapObj.set('?', 'xx');
+    mapObj.set({}, 'yy');
+    for (let key of mapObj) {
+        //console.log(key);
+    }
+}
 
+{
+    //  计算生成的数据结构
+    let arr = [1, 2, 33];
+    //console.log(arr.entries());
+    for (let pair of arr.entries()) {
+        //console.log(pair);
+    }
+}
 
+{
+    //  类数组对象
+    function printArgs() {
+        for (let x of arguments) {
+            //console.log(x);
+        }
+    }
 
+    printArgs('a', 'b');
+}
 
+{
+    //  对象,使用Reflect.ownKeys
+    for (let key of Reflect.ownKeys({'xx': 1})) {
+        //console.log(key);
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{
+    var arr = [1, 2, 34, 44];
+    for (var a in arr) {
+        console.log(arr[a])
+    }
+}
