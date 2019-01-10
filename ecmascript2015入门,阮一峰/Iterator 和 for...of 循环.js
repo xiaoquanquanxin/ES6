@@ -202,8 +202,18 @@
 }
 
 
-
-
+/**
+ * for...of
+ * */
+{
+    //  证明array已经部署了Symbol.iterator
+    const arr = ['red', 'green', 'blue'];
+    const obj = {};
+    obj[Symbol.iterator] = arr[Symbol.iterator].bind(arr);
+    for(let v of obj) {
+        console.log(v); // red green blue
+    }
+}
 
 
 
