@@ -256,9 +256,37 @@
 }
 
 
+/**
+ * Generator.prototype.throw
+ * */
+{
+    function *g() {
+        "use strict";
+        try {
+            yield 1;
+            yield 1;
+            yield 1;
+        } catch (err) {
+            console.log(`内部捕获${err}`,`\n由于 Generator 函数内部的catch语句已经执行过了，不会再捕捉到这个错误了，所以这个错误就被抛出了 Generator 函数体，被函数体外的catch语句捕获。`);
+        }
+        yield 2;
+        yield 3;
+    }
 
+    let i = g();
+    //  执行next是必要的
+    i.next();
+    try {
+        console.log(i.throw('a'));
+        console.log(i.throw('b'));
+    } catch (err) {
+        console.log(`外部捕获${err}`)
+    }
+}
 
-
+/**
+ *
+ * */
 
 
 

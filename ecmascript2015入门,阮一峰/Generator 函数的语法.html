@@ -52,10 +52,12 @@
 </ol>
 <h3>Generator.prototype.throw</h3>
 <ol>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>Generator函数返回的遍历器对象都有一个throw方法,可以在函数体外抛出错误,然后在Generator函数体内捕获.</li>
+    <li>Generator函数内部的catch捕获过外部实例的throw方法抛出的错误之后,就不会再捕获后面的错误了.</li>
+    <li>throw方法可以传递一个参数,被Generator内部的catch语句接收.</li>
+    <li>全局throw方法仅能被throw语句捕获,Generator的throw不仅如此,还可以被Generator函数内部的catch捕获</li>
+    <li>在抛出错误之前,必须先执行过next方法,才能被Generator内部catch捕获.</li>
+    <li>throw方法在被Generator内部捕获之后,会继续执行到下一条yield表达式.</li>
 </ol>
 <script src="loadJs.js"></script>
 <script>
