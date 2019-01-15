@@ -382,7 +382,7 @@
     let a = (function* () {
         yield 2;
         yield 3;
-    });
+    }());
     let delegatingIterator = (function* () {
         yield 1;
         yield* a;
@@ -390,7 +390,25 @@
     }());
 
     for (let value of delegatingIterator) {
-        console.log(value);
+        //console.log(value);
+    }
+}
+//  在内部调用的Generator函数有return语句时
+{
+    let a = (function *() {
+        yield 2;
+        yield 3;
+        return 4;
+    }());
+    let b = (function *() {
+        yield 1;
+        let _temp = ( yield* a);
+        yield _temp;
+        yield 5;
+        return 6;
+    }());
+    for (let key of b) {
+        //console.log(key);
     }
 }
 

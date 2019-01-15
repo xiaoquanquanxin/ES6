@@ -80,7 +80,10 @@
     <li>如果在Generator函数内部调用另一个Generator函数,默认情况下是没有效果的.</li>
     <li>yield*表达式用来在一个Generator函数里面执行另一个Generator函数.</li>
     <li>yield*表达式后必须是一个具有iterator接口的对象.</li>
+    <li>yield表达式后面的Generator函数,如果没有return,则相当于一个for...of遍历了这个对象.如果有return,需要let _temp保存yield表达式的值,这个值就是Generator函数的return值.</li>
 </ol>
+
+
 <script src="loadJs.js"></script>
 <script>
     loadJs('Generator 函数的语法.js');
