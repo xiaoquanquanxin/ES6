@@ -44,7 +44,19 @@
     <li>也就是说,在Generator函数运行的不同阶段,从外部向内部注入不同的值,从而调整函数行为.</li>
     <li>第一次使用next方法时,传递参数是无效的.因为第一个next方法用来启动遍历器对象.</li>
 </ol>
-
+<h3>for...of循环</h3>
+<ol>
+    <li>for...of可以自动遍历generator生成的iterator对象,不必调用next方法.</li>
+    <li class="red">一旦next方法返回的对象的done属性为true,则循环终止,且不包含该返回对象.所以说,遍历不到return 的值.</li>
+    <li>扩展运算符...\结构赋值\Array.from方法内部调用的但是遍历器接口.它们都可以讲Generator函数返回的Iterator对象作为参数.</li>
+</ol>
+<h3>Generator.prototype.throw</h3>
+<ol>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ol>
 <script src="loadJs.js"></script>
 <script>
     loadJs('Generator 函数的语法.js');

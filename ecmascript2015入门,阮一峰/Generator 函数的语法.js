@@ -109,7 +109,7 @@
 
     let genObj = dataConsumer();
     genObj.next();
-    //genObj.next('a');
+    //console.log(genObj.next('a'));
     //console.log(genObj.next('b'));
 }
 
@@ -151,6 +151,113 @@
     //console.log(b.next(1));
     //console.log(b.next(2))
 }
+
+/**
+ * for...of
+ * */
+{
+    let gen = function *() {
+        yield 1;
+        yield 2;
+        return 3;
+    };
+    let obj = gen();
+    for (let key of obj) {
+        //console.log(key);
+    }
+    //console.log(obj.next());
+}
+/**
+ * for...of generator 的 斐波那契
+ * */
+{
+    function * fib(x) {
+        let [p,n] = [1, 0];
+        while (x) {
+            [p, n] = [n, n + p];
+            yield n;
+            x--;
+        }
+        return false;
+    }
+
+    let fi = fib(20);
+    for (let key of fi) {
+        //console.log(key);
+    }
+
+}
+
+/**
+ * for...of 循环对象
+ * */
+{
+    function *gen(x) {
+        "use strict";
+        let propKeys = Reflect.ownKeys(x);
+        for (let key of propKeys) {
+            yield {'key': key, 'value': x[key]};
+        }
+    }
+
+    let obj = {name: 'james', [Symbol('ncaa')]: '??'};
+    let g = gen(obj);
+    for (let key of g) {
+        //console.log(key);
+    }
+}
+
+{
+    //  将Generator部署到Symbol.iterator属性上
+    function * objectEntries() {
+        "use strict";
+        let propKeys = Object.keys(this);
+        for (let propKey of propKeys) {
+            yield [propKey, this[propKey]]
+        }
+    }
+
+    let jane = {first: 'jane', last: 'james'};
+    jane[Symbol.iterator] = objectEntries;
+
+    for (let [key,value] of jane) {
+        //console.log(key, value);
+    }
+
+}
+
+/**
+ *  扩展运算符\解构赋值\Array.from
+ * */
+{
+    //  解构
+    let [x,y,z,w] = num();
+    //console.log(x, y, z, w);
+
+    function * num() {
+        "use strict";
+        yield 1;
+        yield 2;
+        yield 3;
+        return 4;
+    }
+
+    //  扩展运算符
+    //console.log([...num()]);
+    //  Array.from
+    //console.log(Array.from(num()));
+
+    //  对象的Symbol.iterator
+    let obj = {};
+    obj[Symbol.iterator] = num;
+    for (let key of obj) {
+        //console.log(key)
+    }
+}
+
+
+
+
 
 
 
