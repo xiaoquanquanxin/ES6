@@ -58,6 +58,28 @@
     <li>全局throw方法仅能被throw语句捕获,Generator的throw不仅如此,还可以被Generator函数内部的catch捕获</li>
     <li>在抛出错误之前,必须先执行过next方法,才能被Generator内部catch捕获.</li>
     <li>throw方法在被Generator内部捕获之后,会继续执行到下一条yield表达式.</li>
+    <li>throw方法没有被Generator捕获,就不会继续执行了,此后调用的next方法的value是undefined,done是true.</li>
+</ol>
+<h3>Generator.prototype.return</h3>
+<ol>
+    <li>用于结束Generator函数.</li>
+    <li>return后调用next方法,返回的value是undefined,done是true.return方法返回的结果相同.</li>
+    <li>如果Generator函数内部有try...finally语句,且上一次next暂停在try块,则return方法推迟到finally块执行完之后.</li>
+</ol>
+<hr>
+<h3>next,throw,return的共同点</h3>
+<ol>
+    <li>三个方法的本质是同一件事,都是让Generator函数恢复执行,并使用不同的语句替换yield表达式.</li>
+    <li>next方法是通过参数,将上一个yield表达式替换成一个值.</li>
+    <li>throw将yield表达式替换成一个throw语句.</li>
+    <li>return将yield表达式替换成一个return语句.</li>
+</ol>
+<hr>
+<h3>yield*表达式</h3>
+<ol>
+    <li>如果在Generator函数内部调用另一个Generator函数,默认情况下是没有效果的.</li>
+    <li>yield*表达式用来在一个Generator函数里面执行另一个Generator函数.</li>
+    <li>yield*表达式后必须是一个具有iterator接口的对象.</li>
 </ol>
 <script src="loadJs.js"></script>
 <script>

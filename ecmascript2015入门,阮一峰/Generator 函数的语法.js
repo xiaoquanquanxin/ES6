@@ -267,7 +267,7 @@
             yield 1;
             yield 1;
         } catch (err) {
-            console.log(`内部捕获${err}`,`\n由于 Generator 函数内部的catch语句已经执行过了，不会再捕捉到这个错误了，所以这个错误就被抛出了 Generator 函数体，被函数体外的catch语句捕获。`);
+            console.log(`内部捕获${err}`, `\n由于 Generator 函数内部的catch语句已经执行过了，不会再捕捉到这个错误了，所以这个错误就被抛出了 Generator 函数体，被函数体外的catch语句捕获。`);
         }
         yield 2;
         yield 3;
@@ -277,20 +277,122 @@
     //  执行next是必要的
     i.next();
     try {
-        console.log(i.throw('a'));
-        console.log(i.throw('b'));
+        //console.log(i.throw('a'));
+        //console.log(i.throw('b'));
     } catch (err) {
         console.log(`外部捕获${err}`)
     }
 }
 
 /**
- *
+ *  Generator.prototype.return
  * */
+{
+    function * num() {
+        "use strict";
+        yield 1;
+        //  如果上一次暂停在try块里,则等到finally块里的代码执行完才真正return
+        try {
+            yield 2;
+            yield 3;
+        } finally {
+            yield 4;
+            yield 5;
+        }
+        yield 6;
+    }
 
+    let g = num();
+    g.next();
+    g.next();
+    //console.log(g.return());
+    //console.log(g.next());
+}
 
+//  *********
+/**
+ * yield *
+ * */
+{
+    function* foo() {
+        yield 'a';
+        yield 'b';
+    }
 
+    function* bar() {
+        yield 'x';
+        yield* foo();
+        yield 'y';
+    }
 
+    // *********************等同于
+    {
+        function* bar() {
+            yield 'x';
+            yield 'a';
+            yield 'b';
+            yield 'y';
+        }
+    }
+
+    // ***********************等同于
+    {
+        function* bar() {
+            yield 'x';
+            for (let v of foo()) {
+                yield v;
+            }
+            yield 'y';
+        }
+    }
+
+    for (let v of bar()) {
+        //console.log(v);
+    }
+}
+{
+    function* inner() {
+        yield 2;
+    }
+
+    function* outer1() {
+        yield 1;
+        yield inner();
+        yield 3;
+    }
+
+    var gen = outer1();
+    //console.log(gen.next().value);
+    //console.log(gen.next().value.next().value);  // 返回一个遍历器对象
+    //console.log(gen.next().value);
+
+    //  相当于
+    function* outer2() {
+        yield 1;
+        yield* inner();
+        yield 3;
+    }
+
+    var gen = outer2();
+    //console.log(gen.next().value);
+    //console.log(gen.next().value);
+    //console.log(gen.next().value);
+}
+{
+    let a = (function* () {
+        yield 2;
+        yield 3;
+    });
+    let delegatingIterator = (function* () {
+        yield 1;
+        yield* a;
+        yield 4;
+    }());
+
+    for (let value of delegatingIterator) {
+        console.log(value);
+    }
+}
 
 
 
