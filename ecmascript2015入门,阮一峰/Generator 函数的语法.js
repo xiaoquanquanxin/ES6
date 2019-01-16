@@ -412,6 +412,126 @@
     }
 }
 
+{
+    function *foo() {
+        "use strict";
+        yield 1;
+        return 2
+    }
+
+    function *bar() {
+        "use strict";
+        let f = yield * foo();
+        yield f;
+        yield 3;
+    }
+
+    let gen = bar();
+    for (let key of gen) {
+        //console.log(key);
+    }
+}
+
+{
+    function* genFuncWithReturn() {
+        yield 'a';
+        yield 'b';
+        return 'The result';
+    }
+
+    function* logReturned(genObj) {
+        let result = yield* genObj;
+        console.log(result);
+    }
+
+    //let a = [...logReturned(genFuncWithReturn())];
+}
+
+//  数组的深度遍历
+{
+    function * getArr(item) {
+        if (Array.isArray(item)) {
+            for (let key of item) {
+                yield * getArr(key);
+            }
+        } else {
+            yield item;
+        }
+    }
+
+    let arr = [1, [2, [3, 4, 5], 6]];
+    for (let key of getArr(arr)) {
+        //console.log(key);
+    }
+}
+
+
+/**
+ * 作为对象属性的Generator函数
+ * */
+{
+    let o = {
+        *foo(){
+
+        }
+    }
+}
+
+/**
+ * 让Generator函数返回一个正常的对象实例,既可以用next方法,又可以获得正常的this?
+ * */
+//  没求用****************************
+{
+    function * F() {
+        "use strict";
+        this.a = 1;
+        yield this.b = 2;
+        yield this.c = 3;
+    }
+
+    let obj = {};
+    let f = F.call(obj);
+
+    //console.log(f.next());
+    //  这时的f是遍历器对象,obj是实例
+    //console.log(f, obj);
+}
+
+/**
+ * Generator实现状态机
+ * */
+{
+    function *toggle() {
+        "use strict";
+        while (1) {
+            yield 1;
+            yield 2;
+            yield 3;
+        }
+    }
+
+    let g = toggle();
+    let i = 10;
+    while (i) {
+        //console.log(g.next().value);
+        i--;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
