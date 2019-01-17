@@ -267,7 +267,7 @@
             yield 1;
             yield 1;
         } catch (err) {
-            console.log(`内部捕获${err}`, `\n由于 Generator 函数内部的catch语句已经执行过了，不会再捕捉到这个错误了，所以这个错误就被抛出了 Generator 函数体，被函数体外的catch语句捕获。`);
+            console.log(`内部捕获${err}`, `\n由于 Generator 函数内部的catch语句已经执行过了，再次抛出错误不会再捕捉到这个错误了，所以这个错误就被抛出了 Generator 函数体，被函数体外的catch语句捕获。`);
         }
         yield 2;
         yield 3;
@@ -282,6 +282,7 @@
     } catch (err) {
         console.log(`外部捕获${err}`)
     }
+    //console.log(i.next())
 }
 
 /**
@@ -506,7 +507,9 @@
         while (1) {
             yield 1;
             yield 2;
-            yield 3;
+            if (yield 3) {
+                break;
+            }
         }
     }
 
@@ -516,12 +519,21 @@
         //console.log(g.next().value);
         i--;
     }
+
+    let button = document.createElement('button');
+    button.innerHTML = 'james';
+    document.body.appendChild(button);
+    button.onclick = function () {
+        //console.log(g.next(22).value);
+    }
 }
 
+/**
+ * Generator与协程
+ * */
+{
 
-
-
-
+}
 
 
 
