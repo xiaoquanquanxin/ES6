@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generator 函数的异步应用</title>
+</head>
+<body>
+<h3>传统异步编程</h3>
+<ol>
+    <li>回调函数</li>
+    <li>事件监听</li>
+    <li>发布/订阅</li>
+    <li>Promise对象</li>
+</ol>
+<ol start="5">
+    <li>异步:任务不是连续的,在执行中可能插入了其他任务.</li>
+    <li>回调函数:把任务的第二段单独写在一个函数里,等到重新执行这个任务的时候,直接调用这个函数.</li>
+    <li>Promise:回调函数太多时,会出现多重嵌套,形成强耦合.Promise将嵌套改成链式调用.但是一堆then也只是改变了语法,原来的语义并不清楚.</li>
+</ol>
+<h3>Generator异步调用的基本概念</h3>
+<ol>
+    <li>协程:多个线程相互协作,完成异步任务.</li>
+    <li>yield命令表示执行到此处,执行权将交给其他协程.</li>
+    <li>Generator函数最大的特点就是可以交出函数的执行权.</li>
+    <li>Generator函数还有两个特点:函数体内外的数据交换和错误机制处理.</li>
+    <li>next可以向Generator函数内传参,throw可以向Generator抛出错误.</li>
+</ol>
+<h3>Thunk函数(形实转换程序)</h3>
+<ol>
+    <li>求值策略:1.传值调用,先计算实参,2.传名调用,将实参带入函数.</li>
+    <li>Thunk函数的意义:它是传名调用的一种实现策略.将参数放到一个临时函数中,再将这个临时函数传入函数体.</li>
+    <li>任何函数，只要参数有回调函数，就能写成 Thunk 函数的形式.</li>
+</ol>
+</body>
+</html>
