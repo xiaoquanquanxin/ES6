@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>async 函数</title>
+</head>
+<body>
+<h3>概念</h3>
+<ol>
+    <li>它就是 Generator 函数的语法糖,使得异步操作变得更加方便.</li>
+    <li>将*换成async,将yield换成await.</li>
+</ol>
+<ol>
+    <li>内置执行器.</li>
+    <li>更好的语义.async表示异步,await表示等待.比yield语义更清晰.</li>
+    <li>更广的实用性.async函数的await的后面,可以是Promise对象和原始类型的值.</li>
+    <li>返回值是Promise,可以用then方法指定下一步操作.</li>
+</ol>
+<h3>基本用法</h3>
+<ol>
+    <li>async返回一个Promise对象,可以使用then方法添加回调函数.函数执行时,一旦遇到await就会先返回,等到异步操作完成,再接着执行函数体内后面的语句.</li>
+    <li>async函数返回的是Promise对象,可以作为await命令的参数.</li>
+</ol>
+
+<script src="loadJs.js"></script>
+<script>
+    loadJs('async 函数.js');
+</script>
+</body>
+</html>
