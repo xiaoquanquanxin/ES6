@@ -50,6 +50,21 @@
     <li>多个await命令后面的异步操作,如果不存在继发关系,最好让它们同时触发,可以使用Promise.all.</li>
     <li>async函数可以保留运行堆栈.在内部有一个异步函数时,如果它报错,他的错误堆栈将包括async函数.普通函数则不被包含.</li>
 </ol>
+<p>async 函数的实现原理</p>
+<ol>
+    <li>async函数的实现原理,就是讲Generator函数和自动执行器,包装在一个函数里.</li>
+</ol>
+<p>与其他异步处理方法的比较</p>
+<ol>
+    <li>Promise写法比回到函数有改进,但代码全是then,catch,语义不明确.</li>
+    <li>Generator遍历了每个步骤,语义清晰.问题是必须有一个任务运行器去执行Generator对象.</li>
+    <li>async函数简洁,相比Generator,可以自执行.</li>
+</ol>
+<h3>异步遍历器</h3>
+<ol>
+    <li>Iterator接口是一种数据遍历协议,只要调用遍历器对象的next方法,就会得到一个对象,表示当前遍历指针所在的那个位置的信息.</li>
+    <li>异步遍历器最大的特点,调用next方法,返回一个Promise对象.</li>
+</ol>
 <script src="loadJs.js"></script>
 <script>
     loadJs('async 函数.js');

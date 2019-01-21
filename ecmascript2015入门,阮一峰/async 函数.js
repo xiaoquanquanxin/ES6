@@ -160,6 +160,73 @@
 
     //f().then(console.log)
 }
-{
 
+
+/**
+ * 实例:按顺序执行异步操作
+ * 读取一组 URL，然后按顺序输出.
+ * */
+//  promise
+{
+    function logInOrder(urls) {
+        //  读取
+        const textPromise = urls.map(url=> {
+            /**
+             *每个fetch操作都返回一个 Promise 对象
+             * */
+            return fetch(url).then(response=>response.text());
+        });
+        //  输出
+        textPromise.reduce((chain, current)=> {
+            return chain.then(() => current)
+                .then(text => console.log(text.substr(-100, 60)));
+        }, Promise.resolve());
+    };
+    //logInOrder([location.href, location.href.substr(0, location.href.lastIndexOf('.')) + '.js']);
 }
+
+//  async
+{
+    async function logInOrder(urls) {
+        for (let url of urls) {
+            console.log((await (await fetch(url)).text()).substr(0, 50));
+        }
+    };
+    //logInOrder([location.href, location.href.substr(0, location.href.lastIndexOf('.')) + '.js']);
+}
+//  方法2.因为上面的方法有个缺点,在一个async函数里执行多个await,是阻断执行的.
+//  改进方法,让他们可以异步执行.
+//  思路:map一个arr,map出来urls的Promise对象,然后再for...of遍历这个arr
+{
+    async function logInOrder(urls) {
+        let arr = urls.map(async url => {
+            let response = await fetch(url);
+            let text = await response.text();
+            console.log(text.substr(0, 40), new Date().getTime());
+            return text;
+        });
+        return arr;
+    };
+    let list = logInOrder([location.href, location.href.substr(0, location.href.lastIndexOf('.')) + '.js']);
+    list.then(response=>console.log(response));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
