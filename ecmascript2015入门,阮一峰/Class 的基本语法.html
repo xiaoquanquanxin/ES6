@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class 的基本语法</title>
+</head>
+<body>
+<h3>简介</h3>
+<ol>
+    <li>es6的class只是一个语法糖,大部分功能es5都能实现.新的class写法只是让原型的写法更加清晰,更像面向对象语法.</li>
+    <li>方法之间不需要逗号分隔.</li>
+    <li>类的所有方法都定义在prototype上面.</li>
+    <li>类的内部所有定义的方法,都是不可枚举的.</li>
+</ol>
+<h3>constructor方法</h3>
+<ol>
+    <li>constructor方法是默认方法,通过new命令生成对象实例时,自动调用该方法.</li>
+    <li>每一个class都必须有一个constructor方法,如果没有显示定义,则添加一个空的constructor.</li>
+    <li>constructor默认返回this,也可以指定返回另一个对象,但这样会导致实例对象不是class的实例.</li>
+</ol>
+<h3>类的实例</h3>
+<ol>
+    <li>必须使用new调用,否则报错.</li>
+    <li>实例的属性除非显示的定义在其本身,就是this.a=b的形式,否则都是定义在原型上.</li>
+</ol>
+<h3>取值函数（getter）和存值函数（setter）</h3>
+<ol>
+    <li>类的内部可以使用get和set关键字,对某个属性设置存值函数和取值函数,拦截该属性的存取行为.</li>
+    <li>存值函数和取值函数是设置在属性的Descriptor对象上的.</li>
+</ol>
+<h3>属性表达式</h3>
+<ol>
+    <li>类的属性名,可以采用表达式.</li>
+</ol>
+<h3>Class表达式</h3>
+<ol>
+    <li>与函数一样,类也可以使用表达式.</li>
+</ol>
+<h3>注意点</h3>
+<ol>
+    <li>类和模块的内部,默认是严格模式.这是为了考虑未来的代码都在模块中运行,所以把整个语言升级到了严格模式.</li>
+    <li>不存在声明提升.</li>
+    <li>函数的许多特性都被class继承,包括name属性.name属性是指class关键字后面的标识符.</li>
+    <li>给某个方法前加上*,就表示一个Generator方法.</li>
+    <li>this的指向默认指向实例.</li>
+</ol>
+<hr>
+<h3>静态方法</h3>
+<ol>
+    <li>类相当于原型,它的方法会被继承.如果在一个方法前加上static关键字,就表示这个方法不会被继承,而是直接通过类来调用.</li>
+    <li>如果静态方法里有this关键字,它指向class而不是实例.</li>
+    <li>静态方法可以和原型方法重名.</li>
+    <li>父类的静态方法,可以被子类继承.</li>
+</ol>
+<hr>
+<h3>实力属性的新写法</h3>
+<ol>
+    <li>实力属性除了定义在constructor,也可以定义在类的最顶层.</li>
+</ol>
+<hr>
+<h3>静态属性</h3>
+<ol>
+    <li>class本身的属性,不是定义在实例上.</li>
+</ol>
+<hr>
+<h3>私有方法和私有属性</h3>
+<ol>
+    <li>只能在内部访问的方法和属性,外部不能访问.es6通过变通方法实现.</li>
+    <li>方式:将私有方法移出模块.利用Symbol值的唯一性.</li>
+</ol>
+<hr>
+<h3>new.target属性</h3>
+<ol>
+    <li>new是从构造函数生成实例对象的命令.new.target属性一般用于在构造函数中,返回new命令作用于的那个构造函数.</li>
+    <li>可以用来确定构造函数是如何被调用的</li>
+</ol>
+<script src="loadJs.js"></script>
+<script>
+    loadJs('Class 的基本语法.js');
+</script>
+</body>
+</html>
