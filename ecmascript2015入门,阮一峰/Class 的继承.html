@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class 的继承</title>
+</head>
+<body>
+<h3>class继承</h3>
+<h3>强!无敌!!</h3>
+<ol>
+    <li>class可以通过extends关键字实现继承.它比es5更清晰,简单,方便.</li>
+    <li>super关键字表示父类的构造函数,用来新建父类的this对象.</li>
+    <li>子类必须在constructor方法中调用super方法,因为子类的this对象必须先通过父类的构造函数完成塑造,得到父类相同的属性和方法,然后再加上子类的属性和方法.否则无法得到this对象.</li>
+    <li>es5的继承,实例先创造子类的this,在将父类的方法添加到this对象.</li>
+    <li>es6的继承,先创建父类实例对象的属性和方法,然后添加到this对象,再用子类构造函数修改this.</li>
+    <li>这就是说,子类的实例基于父类实例,只要调用super方法后,才能使用this.</li>
+    <li>父类的静态方法,也会被子类继承.</li>
+</ol>
+<h3>Object.getPrototypeOf()</h3>
+<ol>
+    <li>从子类上获取父类.子类实例的原型是父类实例.</li>
+</ol>
+<h3>super关键字</h3>
+<ol>
+    <li>super关键字,既可以当函数使用,也可以当对象使用.</li>
+    <li>当作函数调用时,代表父类的构造函数.虽然代表父类构造函数,但父类构造函数的this指向子类的this.</li>
+    <li>作为对象时,在普通方法中,指向父类的原型,在静态方法中,指向父类.</li>
+    <li>无法通过super调用定义在父类实例上的属性或方法.</li>
+    <li>通过super调用父类方法时,父类方法的this指向子类实例.相当于super.a.call(this).</li>
+    <li>同理,super调用父类静态方法时,父类静态方法的this指向子类.</li>
+    <li>对象都是继承其他对象的,所以可以在任何对象中,使用super关键字.</li>
+</ol>
+<hr>
+<h3>类的 prototype 属性和__proto__属性</h3>
+<p class="red">是对于类,不是实例</p>
+<ol>
+    <li>__proto__表示构造函数的继承,总是指向父类.</li>
+    <li>prototype.__proto__属性,表示方法的继承,总是指向父类的prototype.</li>
+</ol>
+<script src="loadJs.js"></script>
+<script>
+    loadJs('Class 的继承.js');
+</script>
+</body>
+</html>
