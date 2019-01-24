@@ -178,16 +178,81 @@
     //console.log(B.prototype, B.prototype.__proto__, A.prototype);
 }
 
+//  子类实例的__proto__
+{
+    class A {
+    }
+    class B extends A {
+    }
+    //console.log(new B().__proto__, B.prototype);
+    //console.log(new B().__proto__.__proto__, A.prototype);
+}
 
 
+/**
+ *原生构造函数的继承
+ * */
+{
+    class MyArray extends Array {
+        constructor() {
+            super();
+            this.history = [[]];
+        }
 
+        commit() {
+            this.history.push(this.slice());
+        }
 
+        revert() {
+            if (this.history.length) {
+                this.splice(0, this.length, ...this.history[this.history.length - 1]);
+                this.history.pop();
+            }
+        }
+    }
+    let arr = new MyArray();
+    for (let i = 0; i < 10; i++) {
+        arr.push(i);
+        arr.commit();
+    }
+    arr.revert();
+    arr.revert();
+    arr.revert();
+    arr.revert();
+    arr.revert();
+    //console.log(arr);
+}
 
+/**
+ * mixin模式
+ * */
+{
+    function mix(...mixins) {
+         class Mix {
+        }
+        for (let mixin of mixins) {
+            copyProperty(Mix.prototype, mixin);
+            copyProperty(Mix.prototype, Reflect.getPrototypeOf(mixin));
+        }
+        return Mix;
+    }
 
+    function copyProperty(target, source) {
+        for (let key of Reflect.ownKeys(source)) {
+            if (key !== 'constructor'
+                && key !== 'prototype'
+                && key !== 'name') {
+                Object.defineProperty(target, key,
+                    Object.getOwnPropertyDescriptor(source, key));
+            }
+        }
+    }
 
-
-
-
+    class DistributedEdit extends mix({'ncaa': '不好用,意义不明,看看就行.'}) {
+    }
+    let distributededit = new DistributedEdit();
+    console.log(distributededit, distributededit.ncaa)
+}
 
 
 

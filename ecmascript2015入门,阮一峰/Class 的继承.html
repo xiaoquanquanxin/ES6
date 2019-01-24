@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -36,6 +36,18 @@
 <ol>
     <li>__proto__表示构造函数的继承,总是指向父类.</li>
     <li>prototype.__proto__属性,表示方法的继承,总是指向父类的prototype.</li>
+    <li>class B extends A,则B.__proto__ === A;B.prototype.__proto__ === A.prototype.</li>
+    <li>class A,则A.__proto__ === Function.prototype;A.prototype.__proto__ === Object.prototype.A作为一个基类,就是一个普通函数,直接继承Function.prototype.</li>
+</ol>
+<ol>
+    <li>子类实例的__proto__指向子类的原型对象.</li>
+    <li>子类实例的__proto__的__proto__指向父类的原型对象.</li>
+</ol>
+<h3>元肾功能构造函数的继承</h3>
+<ol>
+    <li>es6允许继承原生构造函数定义子类,因为es6是先新建父类的实例对象this,然后再用子类的构造函数修饰this,使得父类的所有行为可以被继承.</li>
+    <li>extends关键字,不仅可以继承类,还可以继承原生的构造函数.</li>
+    <li>继承Object的子类,有一个行为差异.一旦Object方法不是通过new Object形式调用,则会忽略参数.</li>
 </ol>
 <script src="loadJs.js"></script>
 <script>
