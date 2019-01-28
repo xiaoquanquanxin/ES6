@@ -5,8 +5,8 @@
     <title>字符串的扩展</title>
 </head>
 <body>
+<h3>字符串的扩展</h3>
 <ol>
-
     <li>如果unicode字符超过0xffff的数值,需要两个/u来拼接,es6改进为\u{xxxxx}</li>
     <li>ES6 提供了codePointAt方法，能够正确处理 4 个字节储存的字符，返回一个字符的码点,10进制数。</li>
     <li>ES6 提供了String.fromCodePoint方法，可以识别大于0xFFFF的字符，弥补了String.fromCharCode方法的不足。在作用上，正好与codePointAt方法相反。</li>
