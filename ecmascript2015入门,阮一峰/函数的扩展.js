@@ -115,19 +115,23 @@
         this.s1 = 0;
         this.s2 = 0;
         // 箭头函数
-        setInterval(() => this.s1++, 1000);
+        setTimeout(() => {
+            this.s1++;
+            console.log(this);
+        }, 9);
         // 普通函数
-        setInterval(function () {
+        setTimeout(function () {
+            console.log(this)
             this.s2++;
-        }, 1000);
+        }, 9);
     }
 
     var timer = new Timer();
     //timer.s1  = 0; 每个1秒以后+1
     //window.s2 = NaN;
 
-    setTimeout(() => console.log('s1: ', timer.s1), 3100);
-    setTimeout(() => console.log('s2: ', timer.s2), 3100);
+    setTimeout(() => console.log('s1: ', timer.s1), 10);
+    setTimeout(() => console.log('s2: ', timer.s2), 10);
 }
 //  例子  只有真正的function才能绑定this,箭头函数没有自己的this,他永远指向定义该函数时的函数作用域
 //  除了this,arguments、super、new.target也指向外层函数的对应变量.
@@ -275,7 +279,6 @@
     let res = fn(10);
     console.log(res);
 }
-console.clear();
 //  双冒号运算符
 {
     let bar = {};

@@ -25,7 +25,7 @@ addFn(function () {
 addFn(function () {
     setTimeout(function () {
         var showDiv = document.createElement('div');
-        document.body.appendChild(showDiv);
+        //document.body.appendChild(showDiv);
         showDiv.scrollIntoView({
             behavior: "smooth"
         })
