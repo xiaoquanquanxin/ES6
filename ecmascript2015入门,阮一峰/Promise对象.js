@@ -30,7 +30,7 @@
             client.send();
         });
     };
-    getJSON("./Promise对象.html").then(function (json, promise) {
+    getJSON("./15.Promise对象.html").then(function (json, promise) {
         console.log('Contents: ' + json);
         console.log(promise)
     }, function (error) {
