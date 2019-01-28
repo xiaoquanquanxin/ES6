@@ -75,3 +75,9 @@
     console.log(ncaa);
 }
 //可以使用圆括号的情况只有一种：赋值语句的非模式部分，可以使用圆括号。
+{
+    [(b)] = [3]; // 正确
+    ({ p: (d) } = {}); // 正确
+    [(parseInt.prop)] = [3]; // 正确
+    console.log(parseInt.prop)
+}
