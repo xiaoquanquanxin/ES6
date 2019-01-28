@@ -107,19 +107,22 @@
     console.log(x, x.a);
 }
 //  解构赋值
-//完整克隆一个对象，还拷贝对象原型的属性
+//  完整克隆一个对象，还拷贝对象原型的属性
 {
     const proto = {name: 'origin'};
     const obj = {name: 'obj', james: 'x'};
     Object.setPrototypeOf(obj, proto);
+    // 写法一
     let clone = {
         '__proto__': Object.getPrototypeOf(obj), ...obj
     };
     console.log(clone);
 
+    // 写法二
     let clone1 = Object.assign(Object.create(Object.getPrototypeOf(obj)), obj);
     console.log(clone1);
 
+    // 写法三
     //  Object.create( 原型 ， 属性的描述 );
     let clone2 = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
     console.log(Object.getOwnPropertyDescriptors(obj));

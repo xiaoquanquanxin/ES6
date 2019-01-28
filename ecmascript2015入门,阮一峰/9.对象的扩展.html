@@ -3,34 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>对象的扩展</title>
-    <style>
-        p {
-            margin: 0;
-            padding: 0;
-        }
-
-        ul {
-            margin-top: .5em;
-        }
-    </style>
 </head>
 <body>
-
-<p>对象遍历属性规则</p>
-<ul>
-    <li>for in:自身及继承的可枚举键,唯一一个可遍历继承键</li>
-    <li>Object.keys:自身的可枚举键</li>
-    <li>Object.getOwnPropertyNames:自身的全部键</li>
-    <li>Object.getOwnPropertySymbols:自身symbol</li>
-</ul>
-<p>Reflect.ownKeys(),返回自身的一切属性</p>
-<ul>
-    <li>规则:</li>
-    <li>1.数字键从小到大</li>
-    <li>2.字母键按加入顺序</li>
-    <li>3.symbol键按加入顺序</li>
-</ul>
-
+<h3>对象的扩展</h3>
+<ol>
+    <li>简洁表示,{foo}.</li>
+    <li>属性名表达式,{['a'+'b']}</li>
+    <li>枚举性和遍历.</li>
+</ol>
+<h4>对象遍历属性规则:</h4>
+<h5>枚举性:</h5>
+<ol>
+    <li>for in:自身及继承的可枚举属性,唯一一个可遍历继承键.</li>
+    <li>Object.keys:自身的可枚举属性.</li>
+</ol>
+<h5>非枚举性:</h5>
+<ol>
+    <li>Object.getOwnPropertyNames:自身的全部键.</li>
+    <li>Object.getOwnPropertySymbols:自身symbol.</li>
+    <li>Reflect.ownKeys:返回自身的一切属性.</li>
+</ol>
+<p>Reflect.ownKeys的取值规则:</p>
+<ol>
+    <li>数字键从小到大</li>
+    <li>字母键按加入顺序</li>
+    <li>symbol键按加入顺序</li>
+</ol>
+<hr>
+<p>完整克隆一个对象，还拷贝对象原型的属性</p>
+<code>
+    const proto = {name: 'origin'};<br>
+    const obj = {name: 'obj', james: 'x'};<br>
+    Object.setPrototypeOf(obj, proto);<br>
+    // 写法一<br>
+    let clone = {<br>
+    '__proto__': Object.getPrototypeOf(obj), <br>
+    ...obj<br>
+    };<br>
+    <br>
+    // 写法二<br>
+    let clone1 = Object.assign(Object.create(Object.getPrototypeOf(obj)), obj);<br>
+    <br>
+    // 写法三<br>
+    // Object.create( 原型 ， 属性的描述 );<br>
+    let clone2 = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));<br>
+    console.log(Object.getOwnPropertyDescriptors(obj));<br>
+</code>
 <script src="loadJs.js"></script>
 <script>
     loadJs('对象的扩展.js');
