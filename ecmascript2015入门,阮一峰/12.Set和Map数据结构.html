@@ -70,10 +70,9 @@
     <li>用于未来可能消失的对象,防止内存泄漏</li>
     <li>但对于值来说,还是正常引用</li>
 </ul>
+<script src="loadJs.js"></script>
 <script>
-    var script = document.createElement('script');
-    script.src = 'Set和Map数据结构.js?v=' + Math.random();
-    document.head.appendChild(script)
+    loadJs('Set和Map数据结构.js');
 </script>
 <script>
     var list = document.getElementById('list');

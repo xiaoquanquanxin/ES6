@@ -15,6 +15,13 @@ function addFn(fn) {
         fn();
     }
 }
+
+addFn(function () {
+    var meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content= "width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no";
+    document.head.insertBefore(meta,document.head.children[0]);
+});
 addFn(function () {
     setTimeout(function () {
         var showDiv = document.createElement('div');
@@ -29,4 +36,4 @@ addFn(function () {
     link.rel = 'css/text';
     link.innerText = 'body {padding: 0 10px;margin: 0;text-align: justify;word-break: break-all;}.red{color:red}';
     document.head.appendChild(link);
-});
+})

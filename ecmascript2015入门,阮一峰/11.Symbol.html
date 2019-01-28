@@ -39,10 +39,9 @@
     <p>Symbol可以转为字符串和布尔,不能转为数字.</p>
     <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 </section>
+<script src="loadJs.js"></script>
 <script>
-    var script = document.createElement('script');
-    script.src = 'Symbol.js?v=' + Math.random();
-    document.head.appendChild(script)
+    loadJs('Symbol.js');
 </script>
 <script>
     window.onload = function () {
