@@ -29,6 +29,7 @@
     const a1 = [1, 2, 3];
     const a2 = [11, 12, 13];
     const a3 = [...a1, ...a2];
+    console.log(a3);
 }
 //  字符串
 {
@@ -40,7 +41,9 @@
     console.log(a2.reverse().join(''));
 }
 
-//  Array.from(),用于将两类对象转换成真正的数组.包括类数组对象和可遍历对象iterator
+//  Array.from(),用于将两类对象转换成真正的数组.
+//  1.类数组对象
+//  2.可遍历对象iterator
 {
     let arrayLike = {
         '0': 'a',
@@ -50,7 +53,7 @@
     };
     let arr2 = Array.from(arrayLike); // ['a', 'b', 'c']
     console.log(arr2);
-    //  Array.from还可以接受第二个参数，作用类似于数组的map方法，用来对每个元素进行处理，将处理后的值放入返回的数组。
+    //  Array.from还可以接受第二个函数参数，作用类似于数组的map方法，用来对每个元素进行处理，将处理后的值放入返回的数组。
     let arr3 = Array.from(arrayLike, x => x + '16');
     console.log(arr3);
     //  如果map函数里面用到了this关键字，还可以传入Array.from的第三个参数，用来绑定this。
@@ -59,15 +62,17 @@
 //  与扩展运算符的区别
 //  任何有length属性的对象，都可以通过Array.from方法转为数组，而此时扩展运算符就无法转换。
 
-//  Array.of
+//  Array.of,方法用于将一组值，转换为数组,统一new Array参数为数字的不确定性
 {
     let arr = Array.of(3);
     console.log(arr)
 }
 
 //  copyWithin,将一部分拷贝到某处.参数:修改点,copy起始\终止位置
+//  将起始\终止位置处的全部作为一个整体,在修改点处覆盖一次
 {
-    [].copyWithin.call({length: 5, 3: 1}, 0, 3);
+    let arr = [].copyWithin.call({length: 5, 3: 1}, 0, 3);
+    console.log(arr);
 }
 //  find,findIndex,找到第一个符合要求的值,下标
 {
@@ -107,7 +112,7 @@
 //  数组实例的 flat()，flatMap(),将二维数组拉平为一维数组
 {
     //  参数为拉平的层数,可以跳过空位
-    [1, 2, 3, 4, [54, 323, 3]].flat(12);
+    [1, 2, 3, 4, [54, 323, 3]].flat(2);
 }
 //  数组的空位,明确将空位转为undefined。
 {
@@ -116,7 +121,7 @@
     [...[a]] = [];
     a === undefined;
     //  copyWithin()会连空位一起拷贝。
-    [,,2,2,,2,2].copyWithin(1,3,5) === [,2,,2,,2,2];
+    [, , 2, 2, , 2, 2].copyWithin(1, 3, 5) === [, 2, , 2, , 2, 2];
     //  entries,keys,values,find,findIndex
-    [1,3,,3,3,,3].findIndex(x=>x===undefined);
+    [1, 3, , 3, 3, , 3].findIndex(x=>x === undefined);
 }

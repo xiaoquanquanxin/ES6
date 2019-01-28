@@ -6,6 +6,21 @@
 </head>
 <body>
 <h3>数组的扩展</h3>
+<ol>
+    <li>扩展运算符,相当于rest参数的逆运算.合并数组,赋值数组,替代函数的 apply 方法,解构字符串.</li>
+    <li>Array.from,将两类对象转换成真正的数组.1.类数组对象[扩展运算符不能转换],2.可遍历对象iterator.</li>
+    <li>Array.of,解决new Array传入数字参数的不确定性.</li>
+    <li>copyWithin,以第二个参数为数组下标处的值为起点,第三个参数为终点,将这部分内容赋值给第一个参数为下标处的位置.覆盖操作.</li>
+    <li>find,第一个参数是函数参数,找出第一个符合条件的成员\undefined.第二个参数是绑定的this.findIndex,返回下标.</li>
+    <li>fill,填充给定值.后两个参数是起止点.</li>
+    <li>includes,是否包含.</li>
+    <li>flat,将数组拉伸成一个一维数组.flatMap,接受一个函数参数,让每个成员执行函数,并拉伸数组.</li>
+    <li>keys,values,entires返回一个遍历器对象.</li>
+</ol>
+<h4>规则</h4>
+<ol>
+    <li>所有的空位都识别为undefined.</li>
+</ol>
 <script src="loadJs.js"></script>
 <script>
     loadJs('数组的扩展.js');
