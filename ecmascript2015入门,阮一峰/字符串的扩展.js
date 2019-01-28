@@ -11,7 +11,7 @@
 }
 //  字符串for of遍历可以识别大于\uffff的字
 {
-    for (let x of String.fromCodePoint(0x22222)+11) {
+    for (let x of String.fromCodePoint(0x22222) + 11) {
         console.log(x)
     }
 }
@@ -31,7 +31,7 @@
 {
     let s = 'ncaa';
     s.repeat(2);
-    s.repeat('0.2');
+    s.repeat('0.2');        //  ''
 }
 //  如果某个字符串不够指定长度，会在头部或尾部补全。
 {
@@ -41,6 +41,10 @@
 
     x.padEnd(5, 'ab'); // 'xabab'
     x.padEnd(4, 'ab'); // 'xaba'
+}
+//  如果原字符串的长度，等于或大于最大长度，则字符串补全不生效，返回原字符串
+{
+    'xxx'.padStart(1, 'ab');    // 'xxx'
 }
 //  模板字符串
 {
