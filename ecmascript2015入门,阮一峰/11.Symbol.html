@@ -70,7 +70,7 @@
     <li>Symbol.replace,Symbol.search,Symbol.split,类似.</li>
     <li>Symbol.toPrimitive,指向一个方法,该对象被转为原始类型的值时调用该方法.接受一个字符串参数,表示当前的运算模式,[Number,String,Default].</li>
     <li>
-        Symbol.toStringTag,指向一个方法,在对象调用Object.prototype.toString方法时,它的值可以出现在Object.prototype.toString方法返回的字符串中.所以它可以定制Object.prototype.toString方法返回的字符串.
+        Symbol.toStringTag,指向一个值描述value或存取器get,在对象调用Object.prototype.toString方法时,它的值可以出现在Object.prototype.toString方法返回的字符串中.所以它可以定制Object.prototype.toString方法返回的字符串.
     </li>
     <li>Symbol.unscopables,指向一个对象,制定了使用with关键字时,那些属性会被with环境排除.</li>
 
@@ -93,3 +93,16 @@
 </script>
 </body>
 </html>
+<script>
+    function A() {
+
+    }
+    Object.defineProperty(A.prototype, Symbol.toStringTag, {
+        get(){
+            return '123456'
+        }
+    });
+    A.prototype[Symbol.toStringTag] = '123456111';
+    let a = new A();
+    console.log(a.toString());
+</script>
