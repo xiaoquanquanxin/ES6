@@ -4,155 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>Set和Map数据结构</title>
-    <style>
-        body {
-            margin: 0;
-        }
-
-        #list {
-            list-style-type: none;
-        }
-
-        #list li {
-            border: 1px solid;
-            position: relative;
-            line-height: 30px;
-        }
-
-        #list li span {
-            float: right;
-        }
-
-        #aim {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-    </style>
 </head>
 <body>
-<ul id="list">
-    <li>132<span>*</span></li>
-    <li>132<span>***</span></li>
-    <li>132<span>**</span></li>
-    <li>132<span>*****</span></li>
-    <li>132<span>***</span></li>
-</ul>
-<p id="aim">xxx</p>
-<p>set</p>
-<ul>
-    <li>类似于数组,但成员的值都是唯一的</li>
-    <li>Set本身是一个构造函数,用来生成Set数据结构</li>
-    <li></li>
-</ul>
-<p>WeakSet</p>
-<ul>
-    <li>不重复的值的集合</li>
-    <li>WeakSet的成员只能是对象</li>
-    <li>WeakSet中的对象是弱引用,垃圾回收机制可能会回收不用的对象,而不考虑这个对象是否存在于WeakSet中</li>
+<h3>Set和Map数据结构</h3>
+<h4>Set</h4>
+<ol>
+    <li>类似于数组,但成员的值都是唯一的.</li>
+    <li>Set本身是一个构造函数,用来生成Set数据结构.</li>
+    <li>实例具有iterator接口.</li>
+</ol>
+<p>实例属性和方法:</p>
+<ol>
+    <li>size:相当于数组的length.</li>
+    <li>constructor:指向构造函数.</li>
+    <li>add:添加某个成员,返回实例.</li>
+    <li>delete:删除某个成员,返回布尔值,表示成功还是失败.</li>
+    <li>has:是否包含某个成员,返回布尔值.</li>
+    <li>clear:删除全部成员.</li>
+    <li>实例的遍历操作:keys,values,entries,forEach.</li>
+</ol>
+
+<h4>WeakSet</h4>
+<ol>
+    <li>也是不重复的值的集合.</li>
+    <li>WeakSet的成员只能是对象.</li>
+    <li>WeakSet中的对象是弱引用,垃圾回收机制可能会回收不用的对象,而不考虑这个对象是否存在于WeakSet中.</li>
     <li>垃圾回收机制依赖引用计数,如果一个值的引用次数不为零,垃圾回收机制就不会释放这块内存.</li>
-    <li>结束使用改值之后,可能忘记取消引用,导致内存无法释放,进而可能引发内存泄漏.</li>
+    <li>结束使用该值之后,垃圾回收机制可能忘记取消引用,导致内存无法释放,进而可能引发内存泄漏.</li>
     <li>WeakSet里面的引用,都不记入垃圾回收机制,所以不存在内存泄漏的问题</li>
     <li>只要这些对象在外部消失,他在WeakSet里面的引用就会自动消失</li>
     <li>由于垃圾回收机制可以回收WeakSet里面的值,而垃圾回收机制何时运行是不确定的,所以WeakSet的值的个数不确定,故不支持遍历</li>
-</ul>
-<p>Map</p>
-<ul>
+</ol>
+<h4>Map</h4>
+<ol>
     <li>类似于对象,但传统对象只能用字符作为键,而Map可以以对象作为键</li>
     <li>Object是字符串-值对应,而Map是值-值对应</li>
     <li>只有对同一个对象的引用，Map 结构才将其视为同一个键。</li>
-</ul>
-<p>WeakMap</p>
-<ul>
+</ol>
+<h4>WeakMap</h4>
+<ol>
     <li>只接受对象作为键名</li>
     <li>键名指向的对象不计入垃圾回收机制</li>
     <li>以dom元素为键,当这个dom被移除后,这个对应的WeakMap记录也会被清除</li>
     <li>用于未来可能消失的对象,防止内存泄漏</li>
     <li>但对于值来说,还是正常引用</li>
-</ul>
+</ol>
 <script src="loadJs.js"></script>
 <script>
     loadJs('Set和Map数据结构.js');
-</script>
-<script>
-    var list = document.getElementById('list');
-    var span = list.getElementsByTagName('span');
-    var aim = document.getElementById('aim');
-    var nsList = [];
-    var delayDuration = 30;
-    for (var i = 0; i < span.length; i++) {
-        span[i].onclick = (function (i) {
-            return function () {
-                var ns = document.createElement('span');
-                ns.innerHTML = this.innerHTML;
-                ns.top = this.parentNode.offsetTop;
-                ns.left = this.offsetLeft + this.parentNode.offsetLeft;
-                setPos(ns, ns.top, ns.left);
-                ns.style.position = 'absolute';
-                ns.style.lineHeight = '30px';
-                nsList.push(ns);
-                document.body.appendChild(ns);
-                if (timer) {
-                    return;
-                }
-                setTimeout(nsAnimate, delayDuration);
-            }
-        }(i));
-    }
-
-    var timer = null;
-    var aimLeft = aim.offsetLeft;
-    var aimTop = aim.offsetTop;
-    function nsAnimate() {
-        if (!nsList.length) {
-            timer = null;
-            return;
-        }
-        clearTimeout(timer);
-        nsList.forEach(function (ns, i) {
-            ns.top = ns.top - (ns.top - aimTop) / 12;
-            ns.left = ns.left - 10;
-            if (Math.abs(ns.top - aimTop) <= 10 || Math.abs(ns.left - aimLeft) <= 10) {
-                nsList.splice(i, 1);
-                document.body.removeChild(ns);
-            }
-            setPos(ns, ns.top, ns.left);
-        });
-        console.log(nsList.length);
-        timer = setTimeout(nsAnimate, delayDuration);
-    }
-    function setPos(ns, sTop, sLeft) {
-        var style = ns.style;
-        style.top = sTop + 'px';
-        style.left = sLeft + 'px';
-    }
-</script>
-<script>
-    window.onload = function () {
-//        console.clear();
-        var str = '15251321';
-        var _str = str.split('').join(',');
-//        console.log(_str);
-        var len = _str.length;
-        var pLen = 0;
-        var index = 1;  //  回文下标从1开始
-        for (var i = 1; i < len; i++) {
-            var eq = true;
-            for (var j = 1; j <= i; j++) {
-                if (_str[i + j] === _str[i - j]) {
-//                    console.log(_str[j + i]);
-                } else {
-                    eq = false
-//                    debugger;
-                }
-            }
-
-            //  回文到最后几个没必要计算了
-            if (pLen >= (len - i) * 2 + 1) {
-                break;
-            }
-        }
-    }
 </script>
 </body>
 </html>
