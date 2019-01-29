@@ -5,6 +5,22 @@
     <title>对象的新增方法</title>
 </head>
 <body>
+<h3>对象的新增方法</h3>
+<ol>
+    <li>Object.is,是否相等.NaN相等,+0-0不等.</li>
+    <li>Object.assign,将第二个及以后的对象参数的属性拷贝到第一个对象参数中.</li>
+    <li>Object.getOwnPropertyDescriptors,获取对象的全部属性的属性描述,包括Symbol属性.</li>
+    <li>Object.setPrototypeOf,设置原型对象.</li>
+    <li>Object.getPrototypeOf,读取对象的原型.</li>
+    <li>Object.fromEntries,用于Object.entries的逆操作,用于讲一个键值对数组转为对象.</li>
+</ol>
+<h4>遍历方法</h4>
+<ol>
+    <li>Object.keys,返回所有自身可遍历属性键名.</li>
+    <li>Object.values,返回所有自身可遍历属性值.</li>
+    <li>Object.entries,返回所有自身可遍历属性键值对.</li>
+    <li>不含Symbol,不含继承.</li>
+</ol>
 <script src="loadJs.js"></script>
 <script>
     loadJs('对象的新增方法.js');
