@@ -34,6 +34,6 @@ addFn(function () {
 addFn(function () {
     var link = document.createElement('style');
     link.rel = 'css/text';
-    link.innerText = 'body {padding: 0 10px;margin: 0;text-align: justify;word-break: break-all;}.red{color:red}';
+    link.innerText = 'body {padding: 0 10px;margin: 0;text-align: justify;word-break: break-all;}.red{color:red} ol{padding-left:30px;}';
     document.head.appendChild(link);
 })

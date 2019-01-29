@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>Symbol</title>
     <style>
-        p {
+        .overflow {
             line-height: 1.2em;
             overflow: hidden;
             position: relative;
@@ -13,7 +13,7 @@
             word-break: break-all;
         }
 
-        p.lve::after {
+        .overflow.lve::after {
             content: '...';
             display: block;
             line-height: 0.6em;
@@ -29,30 +29,68 @@
     </style>
 </head>
 <body>
-<section>
-    <h4>概述</h4>
-    <p>一种新的原始数据类型Symbol,表示独一无二的值.他是js语言的第七种数据类型</p>
-    <p>symbol通过symbol函数生成一个原始数据类型的值,而不是一个对象</p>
-    <p>每一个symbol都是独一无二的.</p>
-    <p>如果symbol的description是一个对象,则会调用对象的tostring方法</p>
-    <p>Symbol 值不能与其他类型的值进行运算，会报错。</p>
-    <p>Symbol可以转为字符串和布尔,不能转为数字.</p>
-    <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-</section>
+<h3>Symbol</h3>
+<ol>
+    <li>一种新的原始数据类型Symbol,表示独一无二的值.他是js语言的第七种数据类型.</li>
+    <li>symbol通过symbol函数生成一个原始数据类型的值,而不是一个对象.</li>
+    <li>每一个symbol都是独一无二的.</li>
+    <li>如果symbol的description是一个对象,则会调用对象的toString方法.</li>
+    <li>Symbol值不能与其他类型的值进行运算,会报错.</li>
+    <li>Symbol可以转为字符串和布尔,不能转为数字.</li>
+</ol>
+<h3>作为属性的Symbol</h3>
+<ol>
+    <li>能保证不会出现同名属性.</li>
+    <li>防止某一个键不小心被覆盖.</li>
+    <li>不能用点运算符访问,应该用方括号访问.</li>
+</ol>
+<h3>实例:消除魔术字符串</h3>
+<h5>魔术字符串是在代码中多次出现的,形成强耦合的字符串.</h5>
+<ol>
+    <li>常用方法:将它写成一个变量.</li>
+    <li>这个变量的值是什么,并不重要,所以很适合Symbol值.</li>
+</ol>
+<h3>属性名的遍历</h3>
+<ol>
+    <li>Object.getOwnPropertySymbols,可以获取对象中所有的Symbol属性名.</li>
+    <li>Reflect.ownKeys,返回所有键名.</li>
+</ol>
+<h3>其他Symbol方法</h3>
+<ol>
+    <li>Symbol.for,Symbol函数会永远新建一个值.Symbol.for先会检查给定的key是否注册过一次,如果不存在才会新建一个值.</li>
+    <li>Symbol.keyFor,返回一个已登记的Symbol类型的key,仅对Symbol.for注册的值有效.</li>
+</ol>
+<h3>内置的Symbol值</h3>
+<h5>均是在调用某些方法或执行某些操作的时候会调用.</h5>
+<ol>
+    <li>Symbol.iterator,指向对象的默认遍历器方法.对象进行for...of循环时,会调用Symbol.iterator方法.</li>
+    <li>Symbol.hasInstance,指向一个内部方法,当其他对象使用instanceof运算符时,会调用这个方法.</li>
+    <li>Symbol.isConcatSpreadable,等于一个布尔值,控制当调用Array.prototype.concat方法时,是否可以展开数组.</li>
+    <li>Symbol.species,执行一个构造函数,创建衍生对象时,会使用该属性.</li>
+    <li>Symbol.match,指向一个函数,当执行str.match(myObject)时,如果该属性存在,会调用它,返回该方法的返回值.</li>
+    <li>Symbol.replace,Symbol.search,Symbol.split,类似.</li>
+    <li>Symbol.toPrimitive,指向一个方法,该对象被转为原始类型的值时调用该方法.接受一个字符串参数,表示当前的运算模式,[Number,String,Default].</li>
+    <li>
+        Symbol.toStringTag,指向一个方法,在对象调用Object.prototype.toString方法时,它的值可以出现在Object.prototype.toString方法返回的字符串中.所以它可以定制Object.prototype.toString方法返回的字符串.
+    </li>
+    <li>Symbol.unscopables,指向一个对象,制定了使用with关键字时,那些属性会被with环境排除.</li>
+
+</ol>
+<p class="overflow">溢出隐藏,溢出隐藏,溢出隐藏,溢出隐藏,溢出隐藏,溢出隐藏,溢出隐藏,溢出隐藏,溢出隐藏,溢出隐藏,溢出隐藏,溢出隐藏,</p>
 <script src="loadJs.js"></script>
 <script>
     loadJs('Symbol.js');
 </script>
 <script>
-    window.onload = function () {
-        var p = document.getElementsByTagName('p');
+    (function () {
+        var p = document.getElementsByClassName('overflow');
         Array.prototype.forEach.call(p, function (t, i) {
             if (t.offsetHeight >= 3 * 19) {
                 t.style.height = 2 * 19 + 'px';
                 t.classList.add('lve');
             }
-        })
-    }
+        });
+    }());
 </script>
 </body>
 </html>
