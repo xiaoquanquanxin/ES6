@@ -22,7 +22,7 @@
     <li>has:是否包含某个成员,返回布尔值.</li>
     <li>clear:删除全部成员.</li>
     <li>实例的遍历操作:keys,values,entries,forEach.</li>
-    <li>Map的遍历顺序就是插入顺序.</li>
+    <li>Set的遍历顺序就是插入顺序.</li>
 </ol>
 <h4>WeakSet</h4>
 <ol>
@@ -62,7 +62,7 @@
 </ol>
 <h4>WeakMap</h4>
 <ol>
-    <li>只接受对象作为键名,null除外,不接受其他类型.</li>
+    <li class="red">只接受对象作为键名,null除外,不接受其他类型.</li>
     <li>键名指向的对象不计入垃圾回收机制.</li>
     <li>以dom元素为键,当这个dom被移除后,这个对应的WeakMap记录也会被清除.</li>
     <li>用于未来可能消失的对象,防止内存泄漏.</li>
@@ -71,6 +71,13 @@
 <h5>实例方法:</h5>
 <ol>
     <li>get,set,has,delete.</li>
+</ol>
+<h3>总结:</h3>
+<ol>
+    <li>Map类似于对象.Set类似于数组.</li>
+    <li>Map和Set,可以遍历,能统计size,有clear方法.</li>
+    <li>WeakMap和WeakSet均有弱引用,WeakMap对键弱引用,WeakSet对值弱引用.</li>
+    <li>WeakMap仅能接收对象键,WeakSet仅能接收对象值.</li>
 </ol>
 <script src="loadJs.js"></script>
 <script>
