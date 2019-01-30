@@ -6,13 +6,13 @@
 </head>
 <body>
 <h3>Reflect</h3>
-<h4>Proxy是拦截,可以控制是否执行接下来的原生操作.而Reflect相当于原生操作</h4>
+<h5>Proxy是拦截,可以控制是否执行接下来的原生操作.而Reflect相当于原生操作.</h5>
 <ol>
     <li>Reflect[反映；反射，照出；反省]对象与Proxy对象一样,是为了操作对象提供的API.</li>
-    <li>将Object对象的一些明显属于语言内部的方法[Object.defineProperty等]放到Reflect对象上.</li>
-    <li>修改某些Object方法的返回结果使其合理化.</li>
-    <li>让Object操作都编程函数行为.如name in obj delete obj.name 是命令行为.而Reflect.has和Reflect.deleteProperty是函数行为</li>
     <li>Reflect对象的方法与Proxy对象的方法一一对应.可以让Proxy对象的方法方便的调取对应的Reflect方法.</li>
+    <li>将Object对象的一些明显属于语言内部的方法[Object.defineProperty等]放到Reflect对象上.</li>
+    <li>让Object操作都编程函数行为.如name in obj delete obj.name 是命令行为.而Reflect.has和Reflect.deleteProperty是函数行为.</li>
+    <li>修改某些Object方法的返回结果使其合理化.</li>
 </ol>
 <h4>静态方法</h4>
 <p>每一个静态方法都对应一个Proxy实例方法.</p>
