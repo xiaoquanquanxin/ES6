@@ -10,10 +10,10 @@
 <h4>Set</h4>
 <ol>
     <li>类似于数组,但成员的值都是唯一的.</li>
-    <li>Set本身是一个构造函数,用来生成Set数据结构.</li>
     <li>实例具有iterator接口.</li>
+    <li>Set本身是一个构造函数,用来生成Set数据结构.</li>
 </ol>
-<p>实例属性和方法:</p>
+<h5>实例属性和方法:</h5>
 <ol>
     <li>size:相当于数组的length.</li>
     <li>constructor:指向构造函数.</li>
@@ -22,32 +22,55 @@
     <li>has:是否包含某个成员,返回布尔值.</li>
     <li>clear:删除全部成员.</li>
     <li>实例的遍历操作:keys,values,entries,forEach.</li>
+    <li>Map的遍历顺序就是插入顺序.</li>
 </ol>
-
 <h4>WeakSet</h4>
 <ol>
     <li>也是不重复的值的集合.</li>
     <li>WeakSet的成员只能是对象.</li>
-    <li>WeakSet中的对象是弱引用,垃圾回收机制可能会回收不用的对象,而不考虑这个对象是否存在于WeakSet中.</li>
-    <li>垃圾回收机制依赖引用计数,如果一个值的引用次数不为零,垃圾回收机制就不会释放这块内存.</li>
-    <li>结束使用该值之后,垃圾回收机制可能忘记取消引用,导致内存无法释放,进而可能引发内存泄漏.</li>
-    <li>WeakSet里面的引用,都不记入垃圾回收机制,所以不存在内存泄漏的问题</li>
-    <li>只要这些对象在外部消失,他在WeakSet里面的引用就会自动消失</li>
-    <li>由于垃圾回收机制可以回收WeakSet里面的值,而垃圾回收机制何时运行是不确定的,所以WeakSet的值的个数不确定,故不支持遍历</li>
+    <li>WeakSet中的对象是弱引用,垃圾回收机制不考虑这个对象是否存在于WeakSet中.</li>
+    <li>不支持遍历:垃圾回收机制不记录WeakSet中的引用,而垃圾回收机制的运行时间也不确定,所以WeakSet的值的个数不确定.</li>
+</ol>
+<h5>与垃圾回收机制的关系:</h5>
+<ol>
+    <li>垃圾回收机制会定期检查对象是否需要被清理.</li>
+    <li>如果某个值被使用后没有被清除,就会造成内存泄漏.</li>
+    <li>WeakSet里面的引用都是弱引用,不会被垃圾回收机制记录为被引用,所以可能会被清除.</li>
+    <li>只要这些对象在外部消失,它在WeakSet里面的引用也会消失.</li>
+</ol>
+<h5>实例属性和方法:</h5>
+<ol>
+    <li>add,has,delete,同Set.</li>
 </ol>
 <h4>Map</h4>
 <ol>
-    <li>类似于对象,但传统对象只能用字符作为键,而Map可以以对象作为键</li>
-    <li>Object是字符串-值对应,而Map是值-值对应</li>
-    <li>只有对同一个对象的引用，Map 结构才将其视为同一个键。</li>
+    <li>类似于对象,但传统对象只能用字符作为键,而Map可以以对象作为键.</li>
+</ol>
+<h5>实例属性和方法:</h5>
+<ol>
+    <li>size,get,has,delete,clear同Set.</li>
+    <li>set,同Set的add.</li>
+    <li>实例的遍历方法:keys,values,entries,forEach,同Set的遍历操作.</li>
+    <li>Map的遍历顺序就是插入顺序.</li>
+</ol>
+<h5>与其他数据结构的相互转换:</h5>
+<ol>
+    <li>Map转数组:扩展运算符.</li>
+    <li>数组转Map:将数组传入Map构造函数.</li>
+    <li>Map转对象:如果所有Map的键都是字符串,它可以无损地转为对象.需要用到Object.create和for...of.</li>
+    <li>对象转Map:new Map .set.</li>
 </ol>
 <h4>WeakMap</h4>
 <ol>
-    <li>只接受对象作为键名</li>
-    <li>键名指向的对象不计入垃圾回收机制</li>
-    <li>以dom元素为键,当这个dom被移除后,这个对应的WeakMap记录也会被清除</li>
-    <li>用于未来可能消失的对象,防止内存泄漏</li>
-    <li>但对于值来说,还是正常引用</li>
+    <li>只接受对象作为键名,null除外,不接受其他类型.</li>
+    <li>键名指向的对象不计入垃圾回收机制.</li>
+    <li>以dom元素为键,当这个dom被移除后,这个对应的WeakMap记录也会被清除.</li>
+    <li>用于未来可能消失的对象,防止内存泄漏.</li>
+    <li>但对于值来说,还是正常引用.所以即使在外部消除了值的引用,只要键还在,还是可以访问到值.</li>
+</ol>
+<h5>实例方法:</h5>
+<ol>
+    <li>get,set,has,delete.</li>
 </ol>
 <script src="loadJs.js"></script>
 <script>
