@@ -14,21 +14,21 @@
     <li>注意,要使得Proxy起作用,必须针对Proxy实例（上例是proxy对象）进行操作,而不是针对目标对象进行操作.</li>
 </ol>
 <h4>13种支持的拦截操作:</h4>
-<h5>增/改,删,查,获得,遍历,设置属性描述,修改属性描述,设置对象封印,查询对象封印,设置原型对象,查询原型对象,实例作为函数调用,实例作为构造函数调用</h5>
+<p>每一种操作都对应一个Reflect静态方法.</p>
 <ol>
-    <li>set:target,key,value,receiver,用于拦截设置.</li>
-    <li>deleteProperty:target,key,用于拦截delete x,返回一个布尔值.</li>
-    <li>get:target,key,receiver(接收器),用于拦截读取.</li>
-    <li>has:target,key,用于拦截a in b,对for...in不生效.</li>
-    <li>ownKeys:target,拦截Object.getOwnPropertyNames,Object.getOwnPropertySymbols,Object.keys,for...in循环.返回一个数组.</li>
-    <li>defineProperty:target,key,descriptor,拦截Object.definePropertyDescriptor/s,返回一个布尔值.</li>
-    <li>getOwnPropertyDescriptor:target,key,拦截Object.getOwnPropertyDescriptor,返回属性的描述对象.</li>
-    <li>preventExtensions:target,拦截Object.preventExtensions,返回一个布尔值.</li>
-    <li>isExtensible:target,拦截Object.isExtensible,返回一个布尔值.</li>
-    <li>setPrototypeOf:target,proto,拦截Object.preventExtensions,返回一个布尔值.</li>
-    <li>getPrototypeOf:target,拦截Object.setPrototypeOf,返回一个布尔值.</li>
-    <li>apply:target,object,args,拦截Proxy实例作为函数且被调用的操作.</li>
-    <li>construct:target,args,拦截Proxy实例作为构造函数且被调用的操作.</li>
+    <li><div>属性增/改:</div>set:target,key,value,receiver,用于拦截设置.</li>
+    <li><div>属性删除:</div>deleteProperty:target,key,用于拦截delete x,返回一个布尔值.</li>
+    <li><div>属性查:</div>get:target,key,receiver(接收器),用于拦截读取.</li>
+    <li><div>in操作符:</div>has:target,key,用于拦截a in b,对for...in不生效.</li>
+    <li><div>遍历:</div>ownKeys:target,拦截Object.getOwnPropertyNames,Object.getOwnPropertySymbols,Object.keys,for...in循环.返回一个数组.</li>
+    <li><div>设置属性描述:</div>defineProperty:target,key,descriptor,拦截Object.definePropertyDescriptor/s,返回一个布尔值.</li>
+    <li><div>查询属性描述:</div>getOwnPropertyDescriptor:target,key,拦截Object.getOwnPropertyDescriptor,返回属性的描述对象.</li>
+    <li><div>设置对象不可拓展:</div>preventExtensions:target,拦截Object.preventExtensions,返回一个布尔值.</li>
+    <li><div>查询对象不可拓展:</div>isExtensible:target,拦截Object.isExtensible,返回一个布尔值.</li>
+    <li><div>设置对象原型:</div>setPrototypeOf:target,proto,拦截Object.preventExtensions,返回一个布尔值.</li>
+    <li><div>查询对象原型:</div>getPrototypeOf:target,拦截Object.setPrototypeOf,返回一个布尔值.</li>
+    <li><div>作为函数调用:</div>apply:target,object,args,拦截Proxy实例作为函数且被调用的操作.</li>
+    <li><div>作为构造函数调用:</div>construct:target,args,拦截Proxy实例作为构造函数且被调用的操作.</li>
 </ol>
 <h4>可取消的代理实例</h4>
 <ol>

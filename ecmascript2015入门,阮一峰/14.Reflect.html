@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Reflect</title>
-    <style>
-        body {
-            padding: 0;
-            margin: 0;
-            text-align: justify;
-        }
-    </style>
 </head>
 <body>
-<h3>Proxy是拦截,可以控制是否执行接下来的原生操作.而Reflect相当于原生操作</h3>
-<h3>概述</h3>
+<h3>Reflect</h3>
+<h4>Proxy是拦截,可以控制是否执行接下来的原生操作.而Reflect相当于原生操作</h4>
 <ol>
     <li>Reflect[反映；反射，照出；反省]对象与Proxy对象一样,是为了操作对象提供的API.</li>
     <li>将Object对象的一些明显属于语言内部的方法[Object.defineProperty等]放到Reflect对象上.</li>
@@ -21,29 +14,26 @@
     <li>让Object操作都编程函数行为.如name in obj delete obj.name 是命令行为.而Reflect.has和Reflect.deleteProperty是函数行为</li>
     <li>Reflect对象的方法与Proxy对象的方法一一对应.可以让Proxy对象的方法方便的调取对应的Reflect方法.</li>
 </ol>
-<br>
-<h3>静态方法</h3>
+<h4>静态方法</h4>
+<p>每一个静态方法都对应一个Proxy实例方法.</p>
 <ol>
-    <li>Reflect.apply(target,thisArg,args)</li>
-    <li>Reflect.construct(target,args)</li>
-    <li>Reflect.get(target,name,receiver)</li>
-    <li>Reflect.set(target,name,value,receiver)</li>
-    <li>Reflect.defineProperty(target,name,desc)</li>
-    <li>Reflect.deleteProperty(target,name)</li>
-    <li>Reflect.has(target,name)</li>
-    <li>Reflect.ownKeys(target)</li>
-    <li>Reflect.isExtensible(target)</li>
-    <li>Reflect.preventExtensions(target)</li>
-    <li>Reflect.getOwnPropertyDescriptor(target,name)</li>
-    <li>Reflect.getPrototypeOf(target)</li>
-    <li>Reflect.setPrototypeOf(target,prototype)</li>
+    <li><div>属性增/改:</div>Reflect.set(target,name,value,receiver).</li>
+    <li><div>属性删除:</div>Reflect.deleteProperty(target,name).</li>
+    <li><div>属性查:</div>Reflect.get(target,name,receiver).</li>
+    <li><div>in操作符:</div>Reflect.has(target,name).</li>
+    <li><div>遍历:</div>Reflect.ownKeys(target).</li>
+    <li><div>设置属性描述:</div>Reflect.defineProperty(target,name,desc).</li>
+    <li><div>查询属性描述:</div>Reflect.getOwnPropertyDescriptor(target,name).</li>
+    <li><div>设置对象不可拓展:</div>Reflect.preventExtensions(target).</li>
+    <li><div>查询对象不可拓展:</div>Reflect.isExtensible(target).</li>
+    <li><div>设置对象原型:</div>Reflect.setPrototypeOf(target,prototype).</li>
+    <li><div>查询对象原型:</div>Reflect.getPrototypeOf(target).</li>
+    <li><div>作为函数调用,相当于F.p.apply.call(fn,obj,[]):</div>Reflect.apply(target,thisArg,args).</li>
+    <li><div>作为构造函数调用:</div>Reflect.construct(target,args).</li>
 </ol>
-<h3>使用Proxy实现观察者模式</h3>
-<p>观察者模式是函数自动观察数据对象,一旦对象有变化,函数自动执行</p>
 </body>
 <script src="loadJs.js"></script>
 <script>
     loadJs('Reflect.js');
 </script>
 </html>
-
