@@ -71,7 +71,7 @@
             dom.li({}, '…actually that\'s it')
         ));
     //@formatter:on
-    document.body.appendChild(el);
+    //document.body.appendChild(el);
 }
 {
     const proxy = new Proxy({}, {

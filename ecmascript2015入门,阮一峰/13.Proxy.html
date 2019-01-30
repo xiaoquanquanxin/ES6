@@ -4,20 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>Proxy</title>
-    <style>
-        body {
-            margin: 0;
-        }
-    </style>
 </head>
 <body>
-<p>代理器</p>
-<ul>
-    <li>Proxy用于修改某些操作的默认行为,等于在语言层面做出修改,所以属于一种'元编程',即对编程语言进行编程</li>
-    <li>在目标对象之前架设一层'拦截',外界对该对象的访问,必须通过这层拦截,可以对外界的访问进行过滤和改写</li>
-    <li>!!Proxy实际重载了点运算符,使用自己的定义覆盖了原始定义</li>
-    <li>注意，要使得Proxy起作用，必须针对Proxy实例（上例是proxy对象）进行操作，而不是针对目标对象进行操作。</li>
-</ul>
+<h3>代理器</h3>
+<ol>
+    <li>Proxy用于修改某些操作的默认行为,等于在语言层面做出修改,所以属于一种'元编程',即对编程语言进行编程.</li>
+    <li>在目标对象之前架设一层'拦截',外界对该对象的访问,必须通过这层拦截,可以对外界的访问进行过滤和改写.</li>
+    <li class="red">Proxy实际重载了点运算符,使用自己的定义覆盖了原始定义.</li>
+    <li>注意,要使得Proxy起作用,必须针对Proxy实例（上例是proxy对象）进行操作,而不是针对目标对象进行操作.</li>
+</ol>
+<h4>13种支持的拦截操作:</h4>
+<h5>增/改,删,查,获得,遍历,设置属性描述,修改属性描述,设置对象封印,查询对象封印,设置原型对象,查询原型对象,实例作为函数调用,实例作为构造函数调用</h5>
+<ol>
+    <li>set:target,key,value,receiver,用于拦截设置.</li>
+    <li>deleteProperty:target,key,用于拦截delete x,返回一个布尔值.</li>
+    <li>get:target,key,receiver(接收器),用于拦截读取.</li>
+    <li>has:target,key,用于拦截a in b,对for...in不生效.</li>
+    <li>ownKeys:target,拦截Object.getOwnPropertyNames,Object.getOwnPropertySymbols,Object.keys,for...in循环.返回一个数组.</li>
+    <li>defineProperty:target,key,descriptor,拦截Object.definePropertyDescriptor/s,返回一个布尔值.</li>
+    <li>getOwnPropertyDescriptor:target,key,拦截Object.getOwnPropertyDescriptor,返回属性的描述对象.</li>
+    <li>preventExtensions:target,拦截Object.preventExtensions,返回一个布尔值.</li>
+    <li>isExtensible:target,拦截Object.isExtensible,返回一个布尔值.</li>
+    <li>setPrototypeOf:target,proto,拦截Object.preventExtensions,返回一个布尔值.</li>
+    <li>getPrototypeOf:target,拦截Object.setPrototypeOf,返回一个布尔值.</li>
+    <li>apply:target,object,args,拦截Proxy实例作为函数且被调用的操作.</li>
+    <li>construct:target,args,拦截Proxy实例作为构造函数且被调用的操作.</li>
+</ol>
+<h4>可取消的代理实例</h4>
+<ol>
+    <li>Proxy.revocable返回一个对象,包括一个proxy实例和一个revoke函数.</li>
+    <li>执行revoke函数后,再次操作这个proxy拦截器实例就会报错.</li>
+</ol>
+<h4>this</h4>
+<ol>
+    <li>目标对象内部的this关键字会指向Proxy代理.</li>
+</ol>
 <script src="loadJs.js"></script>
 <script>
     loadJs('Proxy.js');
