@@ -204,9 +204,7 @@
         for (let line of obj) {
             break james;
         }
-
 }
-
 
 /**
  * for...of
@@ -261,12 +259,5 @@
     //  对象,使用Reflect.ownKeys
     for (let key of Reflect.ownKeys({'xx': 1})) {
         //console.log(key);
-    }
-}
-
-{
-    var arr = [1, 2, 34, 44];
-    for (var a in arr) {
-        console.log(arr[a])
     }
 }
