@@ -524,36 +524,8 @@
     button.innerHTML = 'james';
     document.body.appendChild(button);
     button.onclick = function () {
-        //console.log(g.next(22).value);
+        //              这个true会改变yield表达式的值
+        var value = g.next(true).value;
+        console.log(value);
     }
 }
-
-/**
- * Generator与协程
- * */
-{
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
