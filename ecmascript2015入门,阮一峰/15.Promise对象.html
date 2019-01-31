@@ -13,15 +13,14 @@
 </ol>
 <h3>Promise对象的特点</h3>
 <ol>
-    <li>对象的状态不受外界影响.</li>
     <li>有三种状态:进行中pending,成功fulfilled,失败rejected.</li>
-    <li>任何其他的操作都无法改变这个状态</li>
+    <li>对象的状态不受外界影响,任何其他的操作都无法改变这个状态.</li>
 </ol>
-<ol start="4">
+<ol id="james" start="3">
     <li>一旦改变状态,就不会再变,任何时候都可以得到这个结果.</li>
     <li>状态的改变有两种可能:1.pending→fulfilled;2.pending→rejected.</li>
     <li>只要这两种情况发生,状态就凝固了,不会再变,称为已定型[resolved].</li>
-    <li>已定型的Promise对象添加回调函数,也会得到结果,但这个结果是死的.</li>
+    <li>已定型的Promise对象添加回调函数,也会得到结果,但这个结果是死的.因为每次都会生成一个新的Promise实例.</li>
 </ol>
 <h3>作用</h3>
 <ol>
