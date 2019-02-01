@@ -48,7 +48,7 @@
 <ol>
     <li>for...of可以自动遍历generator生成的iterator对象,不必调用next方法.</li>
     <li class="red">一旦next方法返回的对象的done属性为true,则循环终止,且不包含该返回对象.所以说,遍历不到return 的值.</li>
-    <li>扩展运算符...\结构赋值\Array.from方法内部调用的都是遍历器接口.它们都可以将Generator函数返回的Iterator对象作为参数.</li>
+    <li>扩展运算符...\结构赋值\Array.from方法内部调用的都是遍历器接口.它们都可以将Generator函数返回的Iterator对象作为被遍历的值.</li>
 </ol>
 <h4>Generator.prototype.throw</h4>
 <ol>
