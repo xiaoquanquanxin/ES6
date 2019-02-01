@@ -34,7 +34,7 @@
 <h5>await</h5>
 <ol>
     <li>await后面,可能是一个值,这时表达式的值就是这个值.</li>
-    <li>await后面,也可能是一个定义了then方法的对象,那么await将其等同于Promise对象.这个表达式的值视Promise的值而定.</li>
+    <li>await后面,也可能是一个定义了then方法的对象,那么await将其等同于Promise对象.这个表达式的值视Promise的返回值而定.通常是then方法的返回值.</li>
     <li>await后面的Promise对象状态变为reject,则reject参数会被async返回的实例的catch方法的回调接受.且中断整个async函数.</li>
     <li>如果希望前一个await后的Promise对象的状态即使reject,也不中断后续await,则需要将它放在try...catch语句中.</li>
     <li>由于Promise对象在执行实例的catch后,会返回一个新的实例,这个实例的状态通常是resolve,则我们可以在这个状态可能会变成reject的实例后面加上catch方法,以防止中断async函数.</li>
