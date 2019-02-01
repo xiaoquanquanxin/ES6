@@ -5,7 +5,7 @@
     <title>async 函数</title>
 </head>
 <body>
-<h3>概念</h3>
+<h3>async</h3>
 <ol>
     <li>它就是 Generator 函数的语法糖,使得异步操作变得更加方便.</li>
     <li>将*换成async,将yield换成await.</li>
@@ -13,17 +13,17 @@
 <ol>
     <li>内置执行器.</li>
     <li>更好的语义.async表示异步,await表示等待.比yield语义更清晰.</li>
-    <li>更广的实用性.async函数的await的后面,可以是Promise对象和原始类型的值.</li>
+    <li>更广的实用性.await后面,可以是Promise对象和原始类型的值.</li>
     <li>返回值是Promise,可以用then方法指定下一步操作.</li>
 </ol>
-<h3>基本用法</h3>
+<h4>basic use</h4>
 <ol>
-    <li>async返回一个Promise对象,可以使用then方法添加回调函数.函数执行时,一旦遇到await就会先返回,等到异步操作完成,再接着执行函数体内后面的语句.</li>
+    <li>async返回一个Promise对象,可以使用then方法添加回调函数.遇到await就会先等到异步操作完成,再接着执行函数体内后面的语句.</li>
     <li>async函数返回的是Promise对象,可以作为await命令的参数.</li>
 </ol>
 <hr>
-<h3>语法</h3>
-<p>async</p>
+<h4>语法</h4>
+<h5>async</h5>
 <ol>
     <li>async函数返回一个Promise对象.</li>
     <li>async函数内部return语句返回的值,会成为then方法回调函数的参数.</li>
@@ -31,7 +31,7 @@
     <li>async函数返回了一个Promise对象p,p拥有一个实例方法then.这个then方法必须等到async函数内部的每一个await命令后面的Promise对象执行完,才会执行.除非遇到return语句或抛出错误.
     </li>
 </ol>
-<p>await</p>
+<h5>await</h5>
 <ol>
     <li>await后面,可能是一个值,这时表达式的值就是这个值.</li>
     <li>await后面,也可能是一个定义了then方法的对象,那么await将其等同于Promise对象.这个表达式的值视Promise的值而定.</li>
@@ -39,28 +39,28 @@
     <li>如果希望前一个await后的Promise对象的状态即使reject,也不中断后续await,则需要将它放在try...catch语句中.</li>
     <li>由于Promise对象在执行实例的catch后,会返回一个新的实例,这个实例的状态通常是resolve,则我们可以在这个状态可能会变成reject的实例后面加上catch方法,以防止中断async函数.</li>
 </ol>
-<p>错误处理</p>
+<h5>错误处理</h5>
 <ol>
-    <li>如果await后面的异步操作出错,那么等于async函数返回的Promise对象的转台被置为reject.</li>
+    <li>如果await后面的异步操作出错,那么等于async函数返回的Promise对象的状态被置为reject.</li>
 </ol>
-<p>使用注意点,优化</p>
+<h5>使用注意点,优化</h5>
 <ol>
     <li>await只能用在async函数中.esm模块加载器支持顶层await</li>
     <li>await命令后面的Promise对象,状态可能是reject,所以最好把await放在try...catch语句中.</li>
     <li>多个await命令后面的异步操作,如果不存在继发关系,最好让它们同时触发,可以使用Promise.all.</li>
     <li>async函数可以保留运行堆栈.在内部有一个异步函数时,如果它报错,他的错误堆栈将包括async函数.普通函数则不被包含.</li>
 </ol>
-<p>async 函数的实现原理</p>
+<h5>async 函数的实现原理</h5>
 <ol>
     <li>async函数的实现原理,就是讲Generator函数和自动执行器,包装在一个函数里.</li>
 </ol>
-<p>与其他异步处理方法的比较</p>
+<h5>与其他异步处理方法的比较</h5>
 <ol>
-    <li>Promise写法比回到函数有改进,但代码全是then,catch,语义不明确.</li>
+    <li>Promise写法比回调函数有改进,但代码全是then,catch,语义不明确.</li>
     <li>Generator遍历了每个步骤,语义清晰.问题是必须有一个任务运行器去执行Generator对象.</li>
     <li>async函数简洁,相比Generator,可以自执行.</li>
 </ol>
-<h3>异步遍历器</h3>
+<h4>异步遍历器</h4>
 <ol>
     <li>Iterator接口是一种数据遍历协议,只要调用遍历器对象的next方法,就会得到一个对象,表示当前遍历指针所在的那个位置的信息.</li>
     <li>异步遍历器最大的特点,调用next方法,返回一个Promise对象.</li>

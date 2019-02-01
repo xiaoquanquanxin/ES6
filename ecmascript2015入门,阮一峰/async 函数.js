@@ -35,21 +35,26 @@
 }
 {
     async function timeout(ms) {
-        await new Promise((resolve)=> {
+        var p = await new Promise((resolve)=> {
             setTimeout(function () {
                 resolve('promise');
             }, ms)
         }).then(function (res) {
+            console.clear();
             console.log(`res:${res}`);
             return 'then已经执行完了';
         });
+        return p;
     };
-    async function asyncPrint(value, ms) {
-        "use strict";
+    async function asyncPrint( ms) {
         let a = await timeout(ms);
-        console.log(a, value);
+        console.log(a);
+        return a;
     };
-    //asyncPrint('hello world', 333);
+    //var p = asyncPrint(333);
+    //p.then(function (res) {
+    //    console.log(res);
+    //});
 }
 
 /**
@@ -210,23 +215,3 @@
     let list = logInOrder([location.href, location.href.substr(0, location.href.lastIndexOf('.')) + '.js']);
     list.then(response=>console.log(response));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
