@@ -46,7 +46,7 @@
         });
         return p;
     };
-    async function asyncPrint( ms) {
+    async function asyncPrint(ms) {
         let a = await timeout(ms);
         console.log(a);
         return a;
@@ -171,7 +171,9 @@
  * 实例:按顺序执行异步操作
  * 读取一组 URL，然后按顺序输出.
  * */
-//  promise
+/**
+ * 这是promise,所以复杂!!
+ * */
 {
     function logInOrder(urls) {
         //  读取
@@ -179,25 +181,35 @@
             /**
              *每个fetch操作都返回一个 Promise 对象
              * */
-            return fetch(url).then(response=>response.text());
+            return new Promise(function (resolve) {
+                setTimeout(function () {
+                    resolve(1)
+                }, Math.random() * 1111)
+            }).then(function (r) {
+                return fetch(url).then(response=>response.text());
+            });
         });
         //  输出
         textPromise.reduce((chain, current)=> {
             return chain.then(() => current)
-                .then(text => console.log(text.substr(-100, 60)));
+                .then(text => {
+                    console.log(text.substr(0, 20))
+                });
         }, Promise.resolve());
     };
-    //logInOrder([location.href, location.href.substr(0, location.href.lastIndexOf('.')) + '.js']);
+    //logInOrder([encodeURIComponent('./async 函数.js'), encodeURIComponent('./Class 的基本语法.js'), location.href]);
 }
 
 //  async
 {
     async function logInOrder(urls) {
         for (let url of urls) {
-            console.log((await (await fetch(url)).text()).substr(0, 50));
+            var text = (await fetch(url)).text();
+            var str = (await text).substr(0, 50);
+            console.log(str);
         }
     };
-    //logInOrder([location.href, location.href.substr(0, location.href.lastIndexOf('.')) + '.js']);
+    logInOrder([encodeURIComponent('./async 函数.js'), encodeURIComponent('./Class 的基本语法.js'), location.href]);
 }
 //  方法2.因为上面的方法有个缺点,在一个async函数里执行多个await,是阻断执行的.
 //  改进方法,让他们可以异步执行.
@@ -212,6 +224,6 @@
         });
         return arr;
     };
-    let list = logInOrder([location.href, location.href.substr(0, location.href.lastIndexOf('.')) + '.js']);
-    list.then(response=>console.log(response));
+    logInOrder([encodeURIComponent('./async 函数.js'), encodeURIComponent('./Class 的基本语法.js'), location.href]);
+    //list.then(response=>console.log(response));
 }
