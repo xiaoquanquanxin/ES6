@@ -6,7 +6,7 @@
 </head>
 <body>
 <h3>class继承</h3>
-<h3>强!无敌!!</h3>
+<h4>强!无敌!!</h4>
 <ol>
     <li>class可以通过extends关键字实现继承.它比es5更清晰,简单,方便.</li>
     <li>super关键字表示父类的构造函数,用来新建父类的this对象.</li>
@@ -16,11 +16,11 @@
     <li>这就是说,子类的实例基于父类实例,只要调用super方法后,才能使用this.</li>
     <li>父类的静态方法,也会被子类继承.</li>
 </ol>
-<h3>Object.getPrototypeOf()</h3>
+<h4>Object.getPrototypeOf()</h4>
 <ol>
     <li>从子类上获取父类.子类实例的原型是父类实例.</li>
 </ol>
-<h3>super关键字</h3>
+<h4>super关键字</h4>
 <ol>
     <li>super关键字,既可以当函数使用,也可以当对象使用.</li>
     <li>当作函数调用时,代表父类的构造函数.虽然代表父类构造函数,但父类构造函数的this指向子类的this.</li>
@@ -31,19 +31,21 @@
     <li>对象都是继承其他对象的,所以可以在任何对象中,使用super关键字.</li>
 </ol>
 <hr>
-<h3>类的 prototype 属性和__proto__属性</h3>
+<h4>类的 prototype 属性和__proto__属性</h4>
 <p class="red">是对于类,不是实例</p>
 <ol>
+    <li>typeof A === 'function',所以:</li>
     <li>__proto__表示构造函数的继承,总是指向父类.</li>
     <li>prototype.__proto__属性,表示方法的继承,总是指向父类的prototype.</li>
     <li>class B extends A,则B.__proto__ === A;B.prototype.__proto__ === A.prototype.</li>
     <li>class A,则A.__proto__ === Function.prototype;A.prototype.__proto__ === Object.prototype.A作为一个基类,就是一个普通函数,直接继承Function.prototype.</li>
 </ol>
+<p class="red">对于实例</p>
 <ol>
     <li>子类实例的__proto__指向子类的原型对象.</li>
     <li>子类实例的__proto__的__proto__指向父类的原型对象.</li>
 </ol>
-<h3>原生功能构造函数的继承</h3>
+<h4>原生功能构造函数的继承</h4>
 <ol>
     <li>es6允许继承原生构造函数定义子类,因为es6是先新建父类的实例对象this,然后再用子类的构造函数修饰this,使得父类的所有行为可以被继承.</li>
     <li>extends关键字,不仅可以继承类,还可以继承原生的构造函数.</li>
