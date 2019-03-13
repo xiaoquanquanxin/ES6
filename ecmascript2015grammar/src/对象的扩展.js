@@ -103,9 +103,10 @@
     console.log(a, b);
     //  【但是,扩展运算符的解构赋值,不能复制继承自原型对象的属性】！！！！
     //  变量声明语句之中，如果使用解构赋值，扩展运算符后面必须是一个变量名
-    let {...x} = obj1;
-    console.log(x, x.a);
+    // let {...x} = obj1;
+    // console.log(x, x.a);
 }
+
 //  解构赋值
 //  完整克隆一个对象，还拷贝对象原型的属性
 {
@@ -114,7 +115,7 @@
     Object.setPrototypeOf(obj, proto);
     // 写法一
     let clone = {
-        '__proto__': Object.getPrototypeOf(obj), ...obj
+        // '__proto__': Object.getPrototypeOf(obj), ...obj
     };
     console.log(clone);
 
@@ -135,9 +136,8 @@
         get x(){console.log(1)}
     }
     let obj2 = {
-        ...{
-            get x(){console.log(2)}
-        }
+        // ...{
+        //     get x(){console.log(2)}
+        // }
     }
-
 }
